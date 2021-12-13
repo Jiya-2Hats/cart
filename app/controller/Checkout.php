@@ -7,7 +7,10 @@ class Checkout extends BaseController
 
     public function __construct()
     {
-
+        if (!SessionControl::checkSession()) {
+            header(HEADER_LOCATION . '/login');
+            exit;
+        }
         $this->productModel = $this->model('Product');
     }
     public function index()
@@ -20,9 +23,11 @@ class Checkout extends BaseController
 
             $productData = $this->productModel->getCurrentProduct($productId);
             $data = ['productData' => $productData];
+            $this->view('Checkout', $data);
+        } else {
+            header(HEADER_LOCATION . '/login/logout');
+            exit;
         }
-
-        $this->view('Checkout', $data);
     }
 
     public function productOrder()

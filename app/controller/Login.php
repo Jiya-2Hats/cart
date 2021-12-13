@@ -50,8 +50,8 @@ class Login extends BaseController
     public function validateGuest()
     {
         try {
-
-            $acc_status = SessionControl::createSession(GUEST_EMAIL, GUEST_NAME);
+            $GuestData = ['email' => GUEST_EMAIL, 'name' => GUEST_NAME];
+            $acc_status = SessionControl::createSession($GuestData);
             if ($acc_status == TRUE) {
                 header(HEADER_LOCATION . '/dashboard');
                 exit;

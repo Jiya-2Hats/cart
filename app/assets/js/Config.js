@@ -1,1 +1,1 @@
-export const baseUrl = "http://localhost/cart";
+const baseUrl = "http://localhost/cart";
