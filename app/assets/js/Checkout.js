@@ -1,7 +1,6 @@
 const stripe = Stripe("pk_test_51K444KSDyd8jioSTlcaX9034Z1RFjSEBzMr42g2MR8JD19e2pXBOeXsbxlLY2631cdVRdnMUrG3xfZ6vzrENqbmx000jUbT4yx");
 // const baseUrl = 'http://localhost/cart';
 
-// The items the customer wants to buy
 
 let elements, id, amount, clientSecretKey;
 
@@ -120,7 +119,7 @@ async function handleSubmit(e) {
 
     }
 
-    //  setOrderStatus(1);
+
 
     setLoading(false);
 
@@ -165,25 +164,6 @@ async function placeOrder() {
 }
 
 
-//  async function setOrderStatus($statusId) {
-//      const {
-//          orderStatus
-//      } = await fetch("http://localhost/e-cart/orderFailed.php", {
-
-//          method: "POST",
-
-//          headers: {
-//              "Content-Type": "application/json"
-//          },
-
-//          body: JSON.stringify({
-//              orderStatus: statusId
-//          }),
-
-//      }).then((r) => r.json());
-//  }
-// Fetches the payment intent status after payment submission
-
 async function checkStatus() {
 
     const clientSecret = new URLSearchParams(window.location.search).get(
@@ -209,14 +189,7 @@ async function checkStatus() {
 
         case "succeeded":
 
-
-
             showMessage("Payment succeeded!");
-
-
-
-
-
 
             break;
 

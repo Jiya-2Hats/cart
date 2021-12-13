@@ -35,7 +35,7 @@
 
                         <form class="col-sm-12" id="payment-form" name="payment-form">
                             <div class="row">
-                                <div class="col-sm-4">
+                                <div class="col-sm-4 px-4">
                                     <div class="col-sm-12 card p-2 mb-2 py-3 text-center ">
                                         <div class="row px-5">
                                             <div class="col-sm-12"> <img src="<?= BASE_URL ?>/app/assets/images/default_product1.png" alt="Product Image" style="width:80%">
@@ -83,7 +83,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-4">
+                                <div class="col-sm-4 px-4">
                                     <p>Shipping </p>
                                     <div class="col-sm-12  mb-2 pb-1">
 
@@ -151,7 +151,7 @@
 
 
 
-                                <div class="col-sm-4 ">
+                                <div class="col-sm-4 px-4">
                                     <div class="col-sm-12 mb-2">
                                         <label for="email">Email </label>
                                         <input type="email" name="email" id="email" class="inputfield py-2 px-2 Input col-sm-12" required value="<?= (isset($_SESSION['email']) ? $_SESSION['email'] : "") ?>">
