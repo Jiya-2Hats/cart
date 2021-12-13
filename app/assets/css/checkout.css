@@ -28,3 +28,8 @@ label {
     min-height: 54.3em;
 
 }
+
+
+#payment-form input {
+    padding: 9px 10px !important;
+}

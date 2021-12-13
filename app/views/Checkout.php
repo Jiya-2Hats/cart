@@ -26,118 +26,178 @@
     <div class="container ">
         <?php if (!empty($data['productData'])) {
             $productData = $data['productData']; ?>
-            <div class="row py-5 mt-5">
-                <div class=" col-sm-3 card productdiv ">
-                    <img src="<?= BASE_URL ?>/app/assets/images/default_product1.png" class="mb-3" alt="Product Image" style="width:80%">
+            <div class="row py-5 mt-5 px-5">
 
-                    <div class="px-4">
-                        <h4><?= $productData[0]['name'] ?> </h4>
-                        <p class="price" id="amount">Rs <?= $productData[0]['amount'] ?> </p>
-                        <p><?= $productData[0]['description'] ?> </p>
 
-                    </div>
-                    <span class="py-2 px-4"> <a href="<?= BASE_URL ?>/dashboard">Continue Shopping</a></span>
-                </div>
-                <div class="col-sm-9 ">
-                    <form class="col-sm-12 d-flex" id="payment-form" name="payment-form">
 
-                        <div class="col-sm-6 px-4">
-                            <div class="col-sm-12 mb-2">
-                                <label for="email">Email </label>
-                                <input type="email" name="email" id="email" class="inputfield py-2 px-2 Input col-sm-12" required value="<?= (isset($_SESSION['email']) ? $_SESSION['email'] : "") ?>">
-                            </div>
+                <div class="col-sm-12 px-5">
+                    <form class="col-sm-12" id="payment-form" name="payment-form">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="  col-sm-12 card p-2 mb-5 ">
+                                    <div class="row p-2">
+                                        <div class="col-sm-6"> <img src="<?= BASE_URL ?>/app/assets/images/default_product1.png" class="mb-3" alt="Product Image" style="width:80%">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="px-4 pt-4 ">
+                                                <h4><?= $productData[0]['name'] ?> </h4>
+                                                <p class="price" id="amount">Rs <?= $productData[0]['amount'] ?> </p>
+                                                <!-- <p><?= $productData[0]['description'] ?> </p> -->
+                                                <span class="py-2 "> <a href="http://localhost/cart/dashboard">Continue Shopping</a></span>
 
-                            <div class="col-sm-12 mb-2 ">
-                                <label for="billLine1">Billing Address </label>
-                                <input type="text" name="billLine1" id="billLine1" placeholder="Address" class="inputfield py-2 px-2 Input col-sm-12" required value="<?= (isset($_SESSION['address_line1']) ? $_SESSION['address_line1'] : "") ?>">
-                                <input type="text" name="billLine2" id="billLine2" placeholder="Landmark" class="inputfield py-2 mt-2 px-2 Input col-sm-12" required value="<?= (isset($_SESSION['address_line2']) ? $_SESSION['address_line2'] : "") ?>">
-
-                            </div>
-
-                            <div class="col-sm-12 mb-2">
-                                <div class="row">
-                                    <div class="col-sm-6 mb-2 pr-1">
-                                        <label for="billCity">City </label>
-                                        <input type="text" name="billCity" id="billCity" placeholder="City" class="inputfield py-2 px-2 Input col-sm-12" required value="<?= (isset($_SESSION['city']) ? $_SESSION['city'] : "") ?>">
-                                        <input type="hidden" name="billCountry" id="billCountry" placeholder="Country">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-6 mb-2">
-                                        <label for="billPostalCode">Postal Code </label>
-                                        <input type="text" name="billPostalCode" placeholder="Postal Code" id="billPostalCode" class="inputfield py-2 px-2 Input col-sm-12" required value="<?= (isset($_SESSION['postal_code']) ? $_SESSION['postal_code'] : "") ?>">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
 
-                                <label for="billState">State </label>
-                                <input type="text" name="billState" placeholder="State" id="billState" class="inputfield py-2 px-2 Input col-sm-12" required value="<?= (isset($_SESSION['state']) ? $_SESSION['state'] : "") ?>">
 
-                            </div>
-                            <div class="col-sm-12 pt-4">
 
-                                <label for="shippingAddress">Same as Billing Address </label>
-                                <input type="checkbox" name="shippingAddress" id="shippingAddress">
-                            </div>
-                            <div class="col-sm-12 mt-2" id="shippingAddressDiv">
-                                <label for="shippingLine1">Shipping Address </label>
-                                <div class="col-sm-12 mb-2 ">
-                                    <input type="text" name="shippingName" id="shippingName" placeholder="Name of the person" class="inputfield py-2 px-2 Input col-sm-12" required>
-                                    <input type="text" name="shippingLine1" id="shippingLine1" placeholder="Address" class="inputfield py-2 mt-2 px-2 Input col-sm-12" required>
-                                    <input type="text" name="shippingLine2" id="shippingLine2" placeholder="Landmark" class="inputfield py-2 mt-2 px-2 Input col-sm-12" required>
 
                                 </div>
 
+
+                                <div class="col-sm-12 pt-4 mb-4">
+
+                                    <label for="shippingAddress">Same as Billing Address </label>
+                                    <input type="checkbox" name="shippingAddress" id="shippingAddress">
+                                </div>
+                                <div class="col-sm-12 mt-2" id="shippingAddressDiv">
+                                    <label for="shippingName">Name of the person </label>
+                                    <div class="col-sm-12 mb-2 ">
+                                        <input type="text" name="shippingName" id="shippingName" placeholder="Name of the person" class="inputfield py-2 px-2 Input col-sm-12" required>
+
+
+                                    </div>
+
+                                    <div class="col-sm-12 mt-2" id="shippingAddressDiv">
+                                        <label for="shippingLine1"> Address </label>
+                                        <div class="col-sm-12 mb-2 ">
+                                            <input type="text" name="shippingLine1" id="shippingLine1" placeholder="Address" class="inputfield py-2 mt-2 px-2 Input col-sm-12" required>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12 mb-2 " id="shippingAddressDiv">
+                                        <label for="shippingLine2"> Landmark </label>
+                                        <div class="col-sm-12  ">
+                                            <input type="text" name="shippingLine2" id="shippingLine2" placeholder="Landmark" class="inputfield py-2  px-2 Input col-sm-12" required>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-sm-12 mb-2 ">
+                                        <div class="row">
+                                            <div class="col-sm-6 pr-1">
+                                                <label for="shippingCity">City </label>
+                                                <input type="text" name="shippingCity" id="shippingCity" placeholder="City" class="inputfield py-2 px-2 Input col-sm-12" required>
+                                            </div>
+                                            <div class="col-sm-6 ">
+                                                <label for="shippingPostalCode">Postal Code </label>
+                                                <input type="text" name="shippingPostalCode" placeholder="Postal Code" id="shippingPostalCode" class="inputfield py-2 px-2 Input col-sm-12" required>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-sm-12 mb-2">
+
+                                        <label for="shippingState">State </label>
+                                        <input type="text" name="shippingState" placeholder="" id="shippingState" class="inputfield py-2 px-2 Input col-sm-12" required>
+
+                                    </div>
+                                    <div class="col-sm-12 ">
+
+                                        <label for="shippingCountry">Country </label>
+                                        <input type="text" name="shippingCountry" placeholder="" id="shippingCountry" class="inputfield py-2 px-2 Input col-sm-12" required>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+
+
+
+
+
+                            <div class="col-sm-6">
+
+
+                                <div class="col-sm-12 mb-2">
+                                    <label for="email">Email </label>
+                                    <input type="email" name="email" id="email" class="inputfield py-2 px-2 Input col-sm-12" required value="<?= (isset($_SESSION['email']) ? $_SESSION['email'] : "") ?>">
+                                </div>
+
                                 <div class="col-sm-12 mb-2 ">
+                                    <label for="billLine1">Billing Address </label>
+                                    <input type="text" name="billLine1" id="billLine1" placeholder="Address" class="inputfield py-2 px-2 Input col-sm-12" required value="<?= (isset($_SESSION['address_line1']) ? $_SESSION['address_line1'] : "") ?>">
+
+
+                                </div>
+
+                                <div class="col-sm-12 mb-2 ">
+                                    <label for="billLine2">Landmark </label>
+                                    <input type="text" name="billLine2" id="billLine2" placeholder="Landmark" class="inputfield py-2  px-2 Input col-sm-12" required value="<?= (isset($_SESSION['address_line2']) ? $_SESSION['address_line2'] : "") ?>">
+
+
+                                </div>
+
+
+
+                                <div class="col-sm-12 mb-2">
                                     <div class="row">
                                         <div class="col-sm-6 mb-2 pr-1">
-                                            <label for="shippingCity">City </label>
-                                            <input type="text" name="shippingCity" id="shippingCity" placeholder="City" class="inputfield py-2 px-2 Input col-sm-12" required>
+                                            <label for="billCity">City </label>
+                                            <input type="text" name="billCity" id="billCity" placeholder="City" class="inputfield py-2 px-2 Input col-sm-12" required value="<?= (isset($_SESSION['city']) ? $_SESSION['city'] : "") ?>">
+                                            <input type="hidden" name="billCountry" id="billCountry" placeholder="Country">
                                         </div>
                                         <div class="col-sm-6 mb-2">
-                                            <label for="shippingPostalCode">Postal Code </label>
-                                            <input type="text" name="shippingPostalCode" placeholder="Postal Code" id="shippingPostalCode" class="inputfield py-2 px-2 Input col-sm-12" required>
+                                            <label for="billPostalCode">Postal Code </label>
+                                            <input type="text" name="billPostalCode" placeholder="Postal Code" id="billPostalCode" class="inputfield py-2 px-2 Input col-sm-12" required value="<?= (isset($_SESSION['postal_code']) ? $_SESSION['postal_code'] : "") ?>">
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="col-sm-12">
 
-                                    <label for="shippingState">State </label>
-                                    <input type="text" name="shippingState" placeholder="" id="shippingState" class="inputfield py-2 px-2 Input col-sm-12" required>
+                                    <label for="billState">State </label>
+                                    <input type="text" name="billState" placeholder="State" id="billState" class="inputfield py-2 px-2 Input col-sm-12" required value="<?= (isset($_SESSION['state']) ? $_SESSION['state'] : "") ?>">
 
                                 </div>
-                                <div class="col-sm-12">
 
-                                    <label for="shippingCountry">Country </label>
-                                    <input type="text" name="shippingCountry" placeholder="" id="shippingCountry" class="inputfield py-2 px-2 Input col-sm-12" required>
 
+                                <!-- </div>
+
+
+
+                            <div class="col-sm-4 "> -->
+                                <div class="col-sm-12 my-2">
+                                    <label for="billName">Name on card </label>
+                                    <input type="text" name="billName" id="billName" placeholder="" class="inputfield py-2 px-3 Input col-sm-12" required value="<?= (isset($_SESSION['name']) ? $_SESSION['name'] : "") ?>">
                                 </div>
+                                <input type="hidden" name="productId" id="productId" value="<?= $productData[0]['id'] ?>">
+                                <div id="payment-element"></div>
+                                <div id="card-element">
+                                </div>
+                                <button id="submit">
+
+                                    <div class="spinner hidden" id="spinner"></div>
+
+                                    <span id="button-text">Pay now</span>
+
+                                </button>
+                                <div id="payment-message" class="hidden"></div>
                             </div>
 
 
                         </div>
+
+
                         <!-- <div class="col-sm-4 mb-2  ">
 
 
                         </div> -->
-                        <div class="col-sm-6 px-4">
-                            <div class="col-sm-12 mb-2">
-                                <label for="billName">Name on card </label>
-                                <input type="text" name="billName" id="billName" placeholder="" class="inputfield py-2 px-3 Input col-sm-12" required value="<?= (isset($_SESSION['name']) ? $_SESSION['name'] : "") ?>">
-                            </div>
-                            <input type="hidden" name="productId" id="productId" value="<?= $productData[0]['id'] ?>">
-                            <div id="payment-element"></div>
-                            <div id="card-element">
-                            </div>
-                            <button id="submit">
 
-                                <div class="spinner hidden" id="spinner"></div>
-
-                                <span id="button-text">Pay now</span>
-
-                            </button>
-                            <div id="payment-message" class="hidden"></div>
-                        </div>
                     </form>
                 </div>
             </div>
