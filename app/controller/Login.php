@@ -7,15 +7,16 @@ class Login extends BaseController
     private $message = "";
     public function __construct()
     {
-        if (isset($_SESSION['sessionFlag'])) {
-            header(HEADER_LOCATION . '/dashboard');
-            exit;
-        }
         $this->userModel = $this->model('User');
     }
 
-    public function index()
+    public function index($page = "")
     {
+
+        if (SessionControl::checkSession()) {
+            header(HEADER_LOCATION . '/dashboard');
+            exit;
+        }
         $data = ["message" => $this->message];
         $this->view('login', $data);
     }
@@ -44,5 +45,26 @@ class Login extends BaseController
         } catch (Exception $e) {
             echo $e->getMessage();
         }
+    }
+
+    public function validateGuest()
+    {
+        try {
+
+            $acc_status = SessionControl::createSession(GUEST_EMAIL, GUEST_NAME);
+            if ($acc_status == TRUE) {
+                header(HEADER_LOCATION . '/dashboard');
+                exit;
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function logout()
+    {
+        SessionControl::sessionDestroy();
+        $this->view('login');
+        exit();
     }
 }

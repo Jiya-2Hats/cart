@@ -1,7 +1,7 @@
      // This is your test publishable API key.
 
      const stripe = Stripe("pk_test_51K444KSDyd8jioSTlcaX9034Z1RFjSEBzMr42g2MR8JD19e2pXBOeXsbxlLY2631cdVRdnMUrG3xfZ6vzrENqbmx000jUbT4yx");
-
+     const baseUrl = 'http://localhost/cart';
 
      // The items the customer wants to buy
 
@@ -25,10 +25,11 @@
 
      async function initialize() {
 
+         let url = baseUrl + '/CreatePaymentIntent';
 
          const {
              clientSecret
-         } = await fetch("http://localhost/e-cart/create.php", {
+         } = await fetch(url, {
 
              method: "POST",
 
@@ -67,7 +68,7 @@
 
          placeOrder();
          //  console.log("ff" + orderStatus);
-
+         let url = baseUrl + '/Checkout/checkoutSuccess';
          const {
              error
          } = await stripe.confirmPayment({
@@ -78,7 +79,7 @@
 
                  // Make sure to change this to your payment completion page
 
-                 return_url: "http://localhost/e-cart/success.php",
+                 return_url: url,
                  payment_method_data: {
                      billing_details: {
                          name: document.getElementById('billName').value,
@@ -95,7 +96,7 @@
 
                  },
                  shipping: {
-                     name: document.querySelector("#shipping_name").value,
+                     name: document.querySelector("#shippingName").value,
                      address: {
                          line1: document.querySelector("#shippingLine1").value,
                          line2: document.querySelector("#shippingLine2").value,
@@ -129,9 +130,10 @@
 
 
      async function placeOrder() {
+         let url = baseUrl + '/checkout/productOrder';
          const {
              orderStatus
-         } = await fetch("http://localhost/e-cart/order.php", {
+         } = await fetch(url, {
 
              method: "POST",
 
@@ -141,9 +143,9 @@
 
              body: JSON.stringify({
                  productId: document.getElementById('productId').value,
-                 ship_name: document.querySelector("#shipping_name").value,
+                 shipName: document.querySelector("#shippingName").value,
                  shipLine1: document.querySelector("#shippingLine1").value,
-                 shipLine1: document.querySelector("#shippingLine2").value,
+                 shipLine2: document.querySelector("#shippingLine2").value,
                  shipCity: document.querySelector("#shippingCity").value,
                  shipState: document.querySelector("#shippingState").value,
                  shipPostalCode: document.querySelector("#shippingPostalCode").value,

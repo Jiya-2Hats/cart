@@ -21,9 +21,9 @@
             <nav class="navbar navbar-light bg-light pt-2 ">
                 <div class="container-fluid">
                     <h1>Cart</h1>
-                    <div class="d-flex col-sm-1">
+                    <div class="d-flex col-sm-2 text-right">
                         <span class="px-3"><i class="fa fa-user px-2"></i><?= $_SESSION['name'] ?></span>
-                        <a href="logout.php">Logout</a>
+                        <a href="<?= BASE_URL ?>/login/logout">Logout</a>
 
                     </div>
                 </div>
@@ -42,8 +42,8 @@
                         $i = 0; ?>
 
                         <div class="col-sm-3 py-5">
-                            <form class="card pdtitem" method="POST" action="checkout.php">
-                                <img src="<?= BASE_URL ?>/app/assets/images/default_product1.png" alt="Denim Jeans" style="width:100%">
+                            <form class="card productItem" method="POST" action="<?= BASE_URL ?>/checkout">
+                                <img src="<?= BASE_URL ?>/app/assets/images/default_product1.png" alt="Product Image" style="width:100%">
 
                                 <div class="px-2 pt-5">
                                     <input type="hidden" name="productId" id="productId" value="<?= $item->id ?>">
@@ -64,7 +64,7 @@
         </div>
     </div>
     <script src="https://js.stripe.com/v3/"></script>
-    <!-- <script src="js/checkout.js"></script> -->
+
 </body>
 
 </html>

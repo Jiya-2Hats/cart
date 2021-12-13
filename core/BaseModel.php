@@ -47,7 +47,7 @@ class BaseModel
             default:
                 $type = PDO::PARAM_STR;
         }
-        $this->statement->bindParam($parameter, $value, $type);
+        $this->statement->bindvalue($parameter, $value, $type);
     }
 
 

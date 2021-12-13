@@ -61,7 +61,7 @@
                         </div>
 
                     </form>
-                    <form method="POST">
+                    <form method="POST" action="<?= BASE_URL ?>/login/validateGuest">
                         <div class="text-center align-items-center justify-content-center py-2">
 
                             <input type="submit" name="loginGuest" value="Login as Guest" class="text-muted guest ">

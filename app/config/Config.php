@@ -4,10 +4,15 @@
 define('APP_ROOT', dirname(dirname(dirname(__FILE__))));
 define('BASE_URL', 'http://localhost/cart');
 define('HEADER_LOCATION', 'Location: ' . BASE_URL);
+
+//MVC Configuration
 define('DEFAULT_CONTROLLER', 'Login');
 define('DEFAULT_METHOD', 'index');
 define('DEFAULT_PARAMETERS', []);
 
+//Guest Login
+define('GUEST_EMAIL', 'guest@gmail.com');
+define('GUEST_NAME', 'Guest');
 
 // Database configuration
 define('DB_HOST', 'localhost');

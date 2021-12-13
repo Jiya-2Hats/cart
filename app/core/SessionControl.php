@@ -19,4 +19,10 @@ class SessionControl
             return true;
         }
     }
+
+    public static function sessionDestroy()
+    {
+        unset($_SESSION['sessionFlag']);
+        session_destroy();
+    }
 }

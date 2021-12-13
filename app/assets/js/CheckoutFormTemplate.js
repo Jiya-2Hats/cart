@@ -18,7 +18,7 @@ if (document.getElementsByName('shippingAddress').length > 0) {
 function toggleShippingAddress() {
     if (document.querySelector('#shippingAddress').checked) {
 
-        document.querySelector("#shipping_name").value = document.querySelector("#billName").value;
+        document.querySelector("#shippingName").value = document.querySelector("#billName").value;
         document.querySelector("#shippingLine1").value = document.querySelector("#billLine1").value;
         document.querySelector("#shippingLine2").value = document.querySelector("#billLine2").value;
         document.querySelector("#shippingCity").value = document.querySelector("#billCity").value;
