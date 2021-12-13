@@ -1,6 +1,6 @@
 <?php
-
 session_start();
+
 class SessionControl
 {
 
@@ -9,15 +9,14 @@ class SessionControl
         return isset($_SESSION['sessionFlag']) ? true : false;
     }
 
-    public static function createSession($email, $name)
+    public static function createSession($userData)
     {
-        if (!empty($email) && !empty($name)) {
-
-            $_SESSION['email'] = $email;
-            $_SESSION['name'] = $name;
-            $_SESSION['sessionFlag'] = true;
-            return true;
+        foreach ($userData as $key => $val) {
+            $_SESSION[$key] = $val;
         }
+
+        $_SESSION['sessionFlag'] = true;
+        return true;
     }
 
     public static function sessionDestroy()

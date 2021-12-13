@@ -18,7 +18,7 @@ class Login extends BaseController
             exit;
         }
         $data = ["message" => $this->message];
-        $this->view('login', $data);
+        $this->view('Login', $data);
     }
 
     public function validateUser()
@@ -64,7 +64,7 @@ class Login extends BaseController
     public function logout()
     {
         SessionControl::sessionDestroy();
-        $this->view('login');
+        $this->view('Login');
         exit();
     }
 }

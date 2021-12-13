@@ -1,12 +1,6 @@
 $(document).ready(function (e) {
-    // $('#Field-countryInput').on('change', function (e) {
-    //     alert('gg');
-    //     alert($(this).find('option:selected').text());
-    // });
-
-    // need to solve this issue created for testing purpose
+    // for test purpose
     $('#billCountry').val("India");
-
 });
 
 

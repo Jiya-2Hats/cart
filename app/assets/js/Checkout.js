@@ -1,295 +1,293 @@
-     // This is your test publishable API key.
+    const stripe = Stripe("pk_test_51K444KSDyd8jioSTlcaX9034Z1RFjSEBzMr42g2MR8JD19e2pXBOeXsbxlLY2631cdVRdnMUrG3xfZ6vzrENqbmx000jUbT4yx");
+    const baseUrl = 'http://localhost/cart';
 
-     const stripe = Stripe("pk_test_51K444KSDyd8jioSTlcaX9034Z1RFjSEBzMr42g2MR8JD19e2pXBOeXsbxlLY2631cdVRdnMUrG3xfZ6vzrENqbmx000jUbT4yx");
-     const baseUrl = 'http://localhost/cart';
+    // The items the customer wants to buy
 
-     // The items the customer wants to buy
+    let elements, id, amount, clientSecretKey;
 
-     let elements, id, amount, clientSecretKey;
 
+    initialize();
 
-     initialize();
+    checkStatus();
 
-     checkStatus();
 
+    if (document.getElementsByName('payment-form').length > 0 && document.getElementsByName('productId').length > 0) {
+        document.querySelector("#payment-form").addEventListener("submit", handleSubmit);
 
-     if (document.getElementsByName('payment-form').length > 0 && document.getElementsByName('productId').length > 0) {
-         document.querySelector("#payment-form").addEventListener("submit", handleSubmit);
+    }
 
-     }
 
+    // Fetches a payment intent and captures the client secret
 
-     // Fetches a payment intent and captures the client secret
 
 
+    async function initialize() {
 
-     async function initialize() {
+        let url = baseUrl + '/CreatePaymentIntent';
 
-         let url = baseUrl + '/CreatePaymentIntent';
+        const {
+            clientSecret
+        } = await fetch(url, {
 
-         const {
-             clientSecret
-         } = await fetch(url, {
+            method: "POST",
 
-             method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-             headers: {
-                 "Content-Type": "application/json"
-             },
+            body: JSON.stringify({
+                id: document.getElementById('productId').value,
+            }),
 
-             body: JSON.stringify({
-                 id: document.getElementById('productId').value,
-             }),
+        }).then((r) => r.json());
 
-         }).then((r) => r.json());
 
+        elements = stripe.elements({
+            clientSecret
+        });
+        clientSecretKey = clientSecret;
 
-         elements = stripe.elements({
-             clientSecret
-         });
-         clientSecretKey = clientSecret;
 
+        const paymentElement = elements.create("payment");
 
-         const paymentElement = elements.create("payment");
+        paymentElement.mount("#payment-element");
 
-         paymentElement.mount("#payment-element");
 
 
 
+    }
 
-     }
 
+    async function handleSubmit(e) {
 
-     async function handleSubmit(e) {
+        e.preventDefault();
 
-         e.preventDefault();
+        setLoading(true);
 
-         setLoading(true);
+        placeOrder();
+        //  console.log("ff" + orderStatus);
+        let url = baseUrl + '/Checkout/checkoutSuccess';
+        const {
+            error
+        } = await stripe.confirmPayment({
 
-         placeOrder();
-         //  console.log("ff" + orderStatus);
-         let url = baseUrl + '/Checkout/checkoutSuccess';
-         const {
-             error
-         } = await stripe.confirmPayment({
+            elements,
 
-             elements,
+            confirmParams: {
 
-             confirmParams: {
+                // Make sure to change this to your payment completion page
 
-                 // Make sure to change this to your payment completion page
+                return_url: url,
+                payment_method_data: {
+                    billing_details: {
+                        name: document.getElementById('billName').value,
+                        email: document.getElementById('email').value,
+                        address: {
+                            city: document.getElementById('billCity').value,
+                            country: "IN",
+                            line1: document.getElementById('billLine1').value,
+                            line2: document.getElementById('billLine2').value,
+                            postal_code: document.getElementById('billPostalCode').value,
+                            state: document.getElementById('billState').value,
+                        },
+                    },
 
-                 return_url: url,
-                 payment_method_data: {
-                     billing_details: {
-                         name: document.getElementById('billName').value,
-                         email: document.getElementById('email').value,
-                         address: {
-                             city: document.getElementById('billCity').value,
-                             country: "IN",
-                             line1: document.getElementById('billLine1').value,
-                             line2: document.getElementById('billLine2').value,
-                             postal_code: document.getElementById('billPostalCode').value,
-                             state: document.getElementById('billState').value,
-                         },
-                     },
+                },
+                shipping: {
+                    name: document.querySelector("#shippingName").value,
+                    address: {
+                        line1: document.querySelector("#shippingLine1").value,
+                        line2: document.querySelector("#shippingLine2").value,
+                        city: document.querySelector("#shippingCity").value,
+                        postal_code: parseInt(document.querySelector("#shippingPostalCode")),
+                        state: document.querySelector("#shippingState").value,
+                        country: document.querySelector("#shippingCountry").value,
+                    },
+                },
 
-                 },
-                 shipping: {
-                     name: document.querySelector("#shippingName").value,
-                     address: {
-                         line1: document.querySelector("#shippingLine1").value,
-                         line2: document.querySelector("#shippingLine2").value,
-                         city: document.querySelector("#shippingCity").value,
-                         postal_code: parseInt(document.querySelector("#shippingPostalCode")),
-                         state: document.querySelector("#shippingState").value,
-                         country: document.querySelector("#shippingCountry").value,
-                     },
-                 },
+            },
 
-             },
+        });
 
-         });
+        if (error.type === "card_error" || error.type === "validation_error") {
 
-         if (error.type === "card_error" || error.type === "validation_error") {
+            showMessage(error.message);
 
-             showMessage(error.message);
+        } else {
 
-         } else {
+            showMessage("An unexpected error occured.");
 
-             showMessage("An unexpected error occured.");
+        }
 
-         }
+        //  setOrderStatus(1);
 
-         //  setOrderStatus(1);
+        setLoading(false);
 
-         setLoading(false);
+    }
 
-     }
 
 
+    async function placeOrder() {
+        let url = baseUrl + '/checkout/productOrder';
+        const {
+            orderStatus
+        } = await fetch(url, {
 
-     async function placeOrder() {
-         let url = baseUrl + '/checkout/productOrder';
-         const {
-             orderStatus
-         } = await fetch(url, {
+            method: "POST",
 
-             method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-             headers: {
-                 "Content-Type": "application/json"
-             },
+            body: JSON.stringify({
+                productId: document.getElementById('productId').value,
+                shipName: document.querySelector("#shippingName").value,
+                shipLine1: document.querySelector("#shippingLine1").value,
+                shipLine2: document.querySelector("#shippingLine2").value,
+                shipCity: document.querySelector("#shippingCity").value,
+                shipState: document.querySelector("#shippingState").value,
+                shipPostalCode: document.querySelector("#shippingPostalCode").value,
+                shipCountry: document.querySelector("#shippingCountry").value,
 
-             body: JSON.stringify({
-                 productId: document.getElementById('productId').value,
-                 shipName: document.querySelector("#shippingName").value,
-                 shipLine1: document.querySelector("#shippingLine1").value,
-                 shipLine2: document.querySelector("#shippingLine2").value,
-                 shipCity: document.querySelector("#shippingCity").value,
-                 shipState: document.querySelector("#shippingState").value,
-                 shipPostalCode: document.querySelector("#shippingPostalCode").value,
-                 shipCountry: document.querySelector("#shippingCountry").value,
+                billName: document.querySelector("#billName").value,
+                billLine1: document.getElementById('billLine1').value,
+                billLine2: document.getElementById('billLine2').value,
+                billCity: document.getElementById('billCity').value,
+                billPostalCode: document.getElementById('billPostalCode').value,
+                billState: document.getElementById('billState').value,
+                billCountry: document.getElementById('billCountry').value,
+                clientSecretKey: clientSecretKey
+            }),
 
-                 billName: document.querySelector("#billName").value,
-                 billLine1: document.getElementById('billLine1').value,
-                 billLine2: document.getElementById('billLine2').value,
-                 billCity: document.getElementById('billCity').value,
-                 billPostalCode: document.getElementById('billPostalCode').value,
-                 billState: document.getElementById('billState').value,
-                 billCountry: document.getElementById('billCountry').value,
-                 clientSecretKey: clientSecretKey
-             }),
+        }).then((r) => r.json());
+    }
 
-         }).then((r) => r.json());
-     }
 
+    //  async function setOrderStatus($statusId) {
+    //      const {
+    //          orderStatus
+    //      } = await fetch("http://localhost/e-cart/orderFailed.php", {
 
-     //  async function setOrderStatus($statusId) {
-     //      const {
-     //          orderStatus
-     //      } = await fetch("http://localhost/e-cart/orderFailed.php", {
+    //          method: "POST",
 
-     //          method: "POST",
+    //          headers: {
+    //              "Content-Type": "application/json"
+    //          },
 
-     //          headers: {
-     //              "Content-Type": "application/json"
-     //          },
+    //          body: JSON.stringify({
+    //              orderStatus: statusId
+    //          }),
 
-     //          body: JSON.stringify({
-     //              orderStatus: statusId
-     //          }),
+    //      }).then((r) => r.json());
+    //  }
+    // Fetches the payment intent status after payment submission
 
-     //      }).then((r) => r.json());
-     //  }
-     // Fetches the payment intent status after payment submission
+    async function checkStatus() {
 
-     async function checkStatus() {
+        const clientSecret = new URLSearchParams(window.location.search).get(
 
-         const clientSecret = new URLSearchParams(window.location.search).get(
+            "payment_intent_client_secret"
 
-             "payment_intent_client_secret"
+        );
 
-         );
 
+        if (!clientSecret) {
 
-         if (!clientSecret) {
+            return;
 
-             return;
+        }
 
-         }
 
+        const {
+            paymentIntent
+        } = await stripe.retrievePaymentIntent(clientSecret);
 
-         const {
-             paymentIntent
-         } = await stripe.retrievePaymentIntent(clientSecret);
 
+        switch (paymentIntent.status) {
 
-         switch (paymentIntent.status) {
+            case "succeeded":
 
-             case "succeeded":
 
 
+                showMessage("Payment succeeded!");
 
-                 showMessage("Payment succeeded!");
 
 
 
 
 
+                break;
 
-                 break;
+            case "processing":
 
-             case "processing":
+                showMessage("Your payment is processing.");
 
-                 showMessage("Your payment is processing.");
+                break;
 
-                 break;
+            case "requires_payment_method":
 
-             case "requires_payment_method":
+                showMessage("Your payment was not successful, please try again.");
 
-                 showMessage("Your payment was not successful, please try again.");
+                break;
 
-                 break;
+            default:
 
-             default:
+                showMessage("Something went wrong.");
 
-                 showMessage("Something went wrong.");
+                break;
 
-                 break;
+        }
 
-         }
+    }
 
-     }
 
+    // ------- UI helpers -------
 
-     // ------- UI helpers -------
 
+    function showMessage(messageText) {
 
-     function showMessage(messageText) {
 
+        const messageContainer = document.querySelector("#payment-message");
 
-         const messageContainer = document.querySelector("#payment-message");
 
+        messageContainer.classList.remove("hidden");
 
-         messageContainer.classList.remove("hidden");
+        messageContainer.textContent = messageText;
 
-         messageContainer.textContent = messageText;
 
+        setTimeout(function () {
 
-         setTimeout(function () {
+            messageContainer.classList.add("hidden");
 
-             messageContainer.classList.add("hidden");
+            messageText.textContent = "";
 
-             messageText.textContent = "";
+        }, 6000);
 
-         }, 6000);
+    }
 
-     }
 
+    // Show a spinner on payment submission
 
-     // Show a spinner on payment submission
+    function setLoading(isLoading) {
 
-     function setLoading(isLoading) {
+        if (isLoading) {
 
-         if (isLoading) {
+            // Disable the button and show a spinner
 
-             // Disable the button and show a spinner
+            document.querySelector("#submit").disabled = true;
 
-             document.querySelector("#submit").disabled = true;
+            document.querySelector("#spinner").classList.remove("hidden");
 
-             document.querySelector("#spinner").classList.remove("hidden");
+            document.querySelector("#button-text").classList.add("hidden");
 
-             document.querySelector("#button-text").classList.add("hidden");
+        } else {
 
-         } else {
+            document.querySelector("#submit").disabled = false;
 
-             document.querySelector("#submit").disabled = false;
+            document.querySelector("#spinner").classList.add("hidden");
 
-             document.querySelector("#spinner").classList.add("hidden");
+            document.querySelector("#button-text").classList.remove("hidden");
 
-             document.querySelector("#button-text").classList.remove("hidden");
+        }
 
-         }
-
-     }
+    }

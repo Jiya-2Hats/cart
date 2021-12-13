@@ -52,10 +52,9 @@ class Checkout extends BaseController
     {
         $data = [];
         if (isset($_GET['redirect_status'])) {
-            $paymentStatus = $_GET['redirect_status'];
             if ($_GET['redirect_status'] == 'succeeded') {
-                // ProductOrder::UpdateOrderStatus(1, $_GET['payment_intent_client_secret']);
-                $data['status'] = $_GET['redirect_status'];
+                $status = $this->productModel->UpdateOrderStatus(1, $_GET['payment_intent_client_secret']);
+                $data['status'] = $status ?  $_GET['redirect_status'] : [];
             }
         }
         $this->view("CheckoutSuccess", $data);

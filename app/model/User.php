@@ -18,7 +18,7 @@ class User extends BaseModel
 
             if (password_verify($password, $result[0]['password'])) {
 
-                return SessionControl::createSession($email, $result[0]['name']);
+                return SessionControl::createSession($result[0]);
             }
         } else {
             return false;
