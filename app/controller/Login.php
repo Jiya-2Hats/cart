@@ -1,4 +1,7 @@
 <?php
+
+use Core\BaseController\BaseController;
+
 class Login extends BaseController
 {
     private $message = "";
@@ -19,23 +22,27 @@ class Login extends BaseController
 
     public function validateUser()
     {
-        if (isset($_POST['login'])) {
+        try {
+            if (isset($_POST['login'])) {
 
-            if (!empty(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) && !empty($_POST['password'])) {
-                $email = $_POST['email'];
-                $password = $_POST['password'];
-                $acc_status = $this->userModel->validateLogin($email, $password);
-                if ($acc_status == TRUE) {
-                    header(HEADER_LOCATION . '/dashboard');
-                    exit;
+                if (!empty(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) && !empty($_POST['password'])) {
+                    $email = $_POST['email'];
+                    $password = $_POST['password'];
+                    $acc_status = $this->userModel->validateLogin($email, $password);
+                    if ($acc_status == TRUE) {
+                        header(HEADER_LOCATION . '/dashboard');
+                        exit;
+                    } else {
+                        $this->message = "Invalid credientials";
+                        $data = ["message" => $this->message];
+                    }
                 } else {
-                    $this->message = "Invalid credientials";
-                    $data = ["message" => $this->message];
+                    $this->message = "Please provide valid credientials";
+                    $this->index();
                 }
-            } else {
-                $this->message = "Please provide valid credientials";
-                $this->index();
             }
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
     }
 }

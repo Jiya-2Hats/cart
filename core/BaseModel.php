@@ -1,4 +1,10 @@
 <?php
+
+namespace Core\BaseModel;
+
+use PDO;
+use PDOException;
+
 class BaseModel
 {
     private $statement;

@@ -2,7 +2,6 @@ options -Indexes
 
 <IfModule mod_rewrite.c>
   RewriteEngine on
-#   RewriteRule ^$ app/ [L]
-#   RewriteRule (.*) app/$1 [L]
+ # RewriteRule / index.php?path=$1 [NC,L,QSA]
   RewriteRule ^(.*)$ index.php?path=$1 [NC,L,QSA]
 </IfModule>

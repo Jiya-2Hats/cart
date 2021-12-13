@@ -1,4 +1,7 @@
 <?php
+
+use Core\BaseController\BaseController;
+
 class Dashboard extends BaseController
 {
 
@@ -8,10 +11,13 @@ class Dashboard extends BaseController
             header(HEADER_LOCATION . '/login');
             exit;
         }
+
+        $this->productModel = $this->model('Product');
     }
 
     public function index()
     {
-        $this->view('dashboard');
+        $data = ["productData" => $this->productModel->getProductList()];
+        $this->view('dashboard', $data);
     }
 }

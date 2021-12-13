@@ -1,4 +1,7 @@
 <?php
+
+namespace Core\BaseController;
+
 class BaseController
 {
     public function model($model)

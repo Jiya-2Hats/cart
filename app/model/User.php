@@ -1,5 +1,7 @@
 <?php
 
+use Core\BaseModel\BaseModel;
+
 class User extends BaseModel
 {
 

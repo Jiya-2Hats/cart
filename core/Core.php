@@ -3,20 +3,25 @@
 class Core
 {
 
-  protected $currentController = 'Login';
-  protected $currentMethod = 'index';
-  protected $params = [];
+  protected $currentController;
+  protected $currentMethod;
+  protected $params;
 
   public function __construct()
   {
+    $this->currentController = DEFAULT_CONTROLLER;
+    $this->currentMethod = DEFAULT_METHOD;
+    $this->params = DEFAULT_PARAMETERS;
 
     $path = $this->getPath();
 
     if (file_exists('app/controller/' . ucwords($path[0]) . '.php')) {
       $this->currentController = ucwords($path[0]);
       unset($path[0]);
+
       require_once 'app/controller/' . $this->currentController . '.php';
       $this->currentController = new $this->currentController;
+
       if (isset($path[1])) {
         if (method_exists($this->currentController, $path[1])) {
           $this->currentMethod = $path[1];
@@ -26,7 +31,10 @@ class Core
       $this->params = $path ? array_values($path) : [];
       call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
     } else {
-      echo "Page not Found";
+
+      require_once 'app/controller/' . $this->currentController . '.php';
+      $this->currentController = new $this->currentController;
+      call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
     }
   }
 

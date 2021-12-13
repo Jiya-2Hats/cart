@@ -4,6 +4,10 @@
 define('APP_ROOT', dirname(dirname(dirname(__FILE__))));
 define('BASE_URL', 'http://localhost/cart');
 define('HEADER_LOCATION', 'Location: ' . BASE_URL);
+define('DEFAULT_CONTROLLER', 'Login');
+define('DEFAULT_METHOD', 'index');
+define('DEFAULT_PARAMETERS', []);
+
 
 // Database configuration
 define('DB_HOST', 'localhost');
