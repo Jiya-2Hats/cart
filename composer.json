@@ -1,5 +1,14 @@
 {
     "require": {
         "stripe/stripe-php": "^7.107"
+    },
+    "autoload": {
+        "files": ["core/Core.php",
+            "core/BaseController.php",
+            "core/BaseModel.php",
+            "app/config/Config.php"]
     }
+
+
+
 }
