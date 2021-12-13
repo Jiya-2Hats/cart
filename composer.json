@@ -6,7 +6,8 @@
         "files": ["core/Core.php",
             "core/BaseController.php",
             "core/BaseModel.php",
-            "app/config/Config.php"]
+            "app/config/Config.php",
+            "app/core/SessionControl.php"]
     }
 
 

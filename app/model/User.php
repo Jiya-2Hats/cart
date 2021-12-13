@@ -3,27 +3,20 @@
 class User extends BaseModel
 {
 
-    public function validateUser($email, $pswd)
+    public function validateLogin($email, $password)
     {
         $sql2 = "select * from users where email=:email";
         $this->prepare($sql2);
         $this->bindParameter(':email', $email);
         $result = $this->execute();
-        echo $count = $result->rowCount();
+        $count = $this->rowCount();
 
         if ($count > 0) {
             $result = $this->resultSet(PDO::FETCH_ASSOC);
 
-            if (password_verify($pswd, $result[0]['password'])) {
+            if (password_verify($password, $result[0]['password'])) {
 
-                $name = $result[0]['name'];
-                // session_start();
-                // $_SESSION['email'] = $email;
-                // $_SESSION['username'] = $name;
-                // $_SESSION['sessionFlag'] = 1;
-                // $ses = SessionCheck::createSession($result[0]);
-                // return $ses;
-                return true;
+                return SessionControl::createSession($email, $result[0]['name']);
             }
         } else {
             return false;
