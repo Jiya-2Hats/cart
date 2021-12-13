@@ -2,6 +2,5 @@ options -Indexes
 
 <IfModule mod_rewrite.c>
   RewriteEngine on
- # RewriteRule / index.php?path=$1 [NC,L,QSA]
   RewriteRule ^(.*)$ index.php?path=$1 [NC,L,QSA]
 </IfModule>
