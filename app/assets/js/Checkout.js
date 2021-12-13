@@ -95,6 +95,7 @@
                 },
                 shipping: {
                     name: document.querySelector("#shippingName").value,
+                    phone: document.querySelector("#shipPhone").value,
                     address: {
                         line1: document.querySelector("#shippingLine1").value,
                         line2: document.querySelector("#shippingLine2").value,
@@ -142,6 +143,7 @@
             body: JSON.stringify({
                 productId: document.getElementById('productId').value,
                 shipName: document.querySelector("#shippingName").value,
+                shipPhone: document.querySelector("#shipPhone").value,
                 shipLine1: document.querySelector("#shippingLine1").value,
                 shipLine2: document.querySelector("#shippingLine2").value,
                 shipCity: document.querySelector("#shippingCity").value,

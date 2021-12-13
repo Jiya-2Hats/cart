@@ -31,41 +31,58 @@
 
 
                 <div class="col-sm-12 px-5">
+
+
+                    <div class="  col-sm-6 card p-2 mb-5 ">
+                        <div class="row p-2">
+                            <div class="col-sm-6"> <img src="<?= BASE_URL ?>/app/assets/images/default_product1.png" class="mb-3" alt="Product Image" style="width:80%">
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="px-4 pt-4 ">
+                                    <h4><?= $productData[0]['name'] ?> </h4>
+                                    <p class="price" id="amount">Rs <?= $productData[0]['amount'] ?> </p>
+                                    <!-- <p><?= $productData[0]['description'] ?> </p> -->
+                                    <span class="py-2 "> <a href="http://localhost/cart/dashboard">Continue Shopping</a></span>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+
                     <form class="col-sm-12" id="payment-form" name="payment-form">
                         <div class="row">
-                            <div class="col-sm-6">
-                                <div class="  col-sm-12 card p-2 mb-5 ">
-                                    <div class="row p-2">
-                                        <div class="col-sm-6"> <img src="<?= BASE_URL ?>/app/assets/images/default_product1.png" class="mb-3" alt="Product Image" style="width:80%">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="px-4 pt-4 ">
-                                                <h4><?= $productData[0]['name'] ?> </h4>
-                                                <p class="price" id="amount">Rs <?= $productData[0]['amount'] ?> </p>
-                                                <!-- <p><?= $productData[0]['description'] ?> </p> -->
-                                                <span class="py-2 "> <a href="http://localhost/cart/dashboard">Continue Shopping</a></span>
 
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="col-sm-4">
 
+                                <p>Shipping </p>
+                                <div class="col-sm-12  mb-2 pb-1">
 
-
-
+                                    <label for="shippingAddress">Shipping Address same as Billing Address </label>
+                                    <input type="checkbox" name="shippingAddress" id="shippingAddress" class="">
                                 </div>
-
-
-                                <div class="col-sm-12 pt-4 mb-4">
-
-                                    <label for="shippingAddress">Same as Billing Address </label>
-                                    <input type="checkbox" name="shippingAddress" id="shippingAddress">
-                                </div>
-                                <div class="col-sm-12 mt-2" id="shippingAddressDiv">
-                                    <label for="shippingName">Name of the person </label>
+                                <div class="col-sm-12 mt-2" id="">
+                                    <label for="shipPhone">Phone Number </label>
                                     <div class="col-sm-12 mb-2 ">
-                                        <input type="text" name="shippingName" id="shippingName" placeholder="Name of the person" class="inputfield py-2 px-2 Input col-sm-12" required>
+                                        <input type="text" name="shipPhone" id="shipPhone" placeholder="Contact Number" class="inputfield py-2 px-2 Input col-sm-12" required>
+                                    </div>
+                                </div>
 
 
+
+                                <div class="col-sm-12 mt-2" id="shippingAddressDiv">
+
+                                    <div class="col-sm-12 mt-2" id="">
+                                        <label for="shippingName">Name of the person </label>
+                                        <div class="col-sm-12 mb-2 ">
+                                            <input type="text" name="shippingName" id="shippingName" placeholder="Name of the person" class="inputfield py-2 px-2 Input col-sm-12" required>
+
+
+                                        </div>
                                     </div>
 
                                     <div class="col-sm-12 mt-2" id="shippingAddressDiv">
@@ -121,7 +138,7 @@
 
 
 
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
 
 
                                 <div class="col-sm-12 mb-2">
@@ -166,11 +183,11 @@
                                 </div>
 
 
-                                <!-- </div>
+                            </div>
 
 
 
-                            <div class="col-sm-4 "> -->
+                            <div class="col-sm-4 ">
                                 <div class="col-sm-12 my-2">
                                     <label for="billName">Name on card </label>
                                     <input type="text" name="billName" id="billName" placeholder="" class="inputfield py-2 px-3 Input col-sm-12" required value="<?= (isset($_SESSION['name']) ? $_SESSION['name'] : "") ?>">

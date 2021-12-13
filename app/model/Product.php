@@ -55,14 +55,14 @@ class Product extends BaseModel
     public function placeOrder($orderData)
     {
         try {
-            // var_dump($orderData);
+
             $productId =  (int)$orderData->productId;
             $billPostalCode =  (int)$orderData->billPostalCode;
             $shipPostalCode = (int)$orderData->shipPostalCode;
             $orderStatus = 0;
 
-            $order = 'INSERT INTO product_order(product_id, bill_name, bill_address_line1, bill_address_line2, bill_city, bill_state,bill_country,bill_postal_code,ship_name, ship_address_line1, ship_address_line2, ship_city,ship_state, ship_country, ship_postal_code,order_status, stripe_client_secret) 
-                                        values(:productId,:billName,:billLine1,:billLine2,:billCity,:billState,:billCountry,:billPostalCode,:shipName,:shipLine1,:shipLine2,:shipCity,:shipState,:shipCountry,:shipPostalCode,:orderStatus,:clientSecretKey) ';
+            $order = 'INSERT INTO product_order(product_id, bill_name, bill_address_line1, bill_address_line2, bill_city, bill_state,bill_country,bill_postal_code,ship_name,ship_phone,ship_address_line1, ship_address_line2, ship_city,ship_state, ship_country, ship_postal_code,order_status, stripe_client_secret) 
+                                        values(:productId,:billName,:billLine1,:billLine2,:billCity,:billState,:billCountry,:billPostalCode,:shipName,:shipPhone,:shipLine1,:shipLine2,:shipCity,:shipState,:shipCountry,:shipPostalCode,:orderStatus,:clientSecretKey) ';
 
             $this->prepare($order);
             $this->bindParameter(':productId', $productId);
@@ -75,6 +75,7 @@ class Product extends BaseModel
             $this->bindParameter(':billPostalCode', $billPostalCode);
 
             $this->bindParameter(':shipName',  $orderData->shipName);
+            $this->bindParameter(':shipPhone', $orderData->shipPhone);
             $this->bindParameter(':shipLine1', $orderData->shipLine1);
             $this->bindParameter(':shipLine2',  $orderData->shipLine2);
             $this->bindParameter(':shipCity', $orderData->shipCity);
