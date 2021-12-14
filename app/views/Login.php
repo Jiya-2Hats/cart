@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="<?= BASE_URL ?>/app/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="<?= BaseURL ?>/app/assets/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="<?= BASE_URL ?>/app/assets/css/login.css" />
+    <link rel="stylesheet" href="<?= BaseURL ?>/app/assets/css/login.css" />
 </head>
 
 <body>
@@ -18,7 +18,7 @@
             <div class="row d-flex justify-content-center align-items-center h-100 py-5">
 
                 <div class="col-md-12 py-4 offset-xl-1 usercard">
-                    <form method="POST" id="login" class="col-sm-12" action="<?= BASE_URL ?>/login/validateUser">
+                    <form method="POST" id="login" class="col-sm-12" action="<?= BaseURL ?>/login/validateUser">
 
                         <div class="width-text text-center ">
                             <h5 class="pb-4 text-center">Login </h5>
@@ -61,7 +61,7 @@
                         </div>
 
                     </form>
-                    <form method="POST" action="<?= BASE_URL ?>/login/validateGuest">
+                    <form method="POST" action="<?= BaseURL ?>/login/validateGuest">
                         <div class="text-center align-items-center justify-content-center py-2">
 
                             <input type="submit" name="loginGuest" value="Login as Guest" class="text-muted guest ">

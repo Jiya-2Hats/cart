@@ -8,7 +8,7 @@ class Checkout extends BaseController
     public function __construct()
     {
         if (!SessionControl::checkSession()) {
-            header(HEADER_LOCATION . '/login');
+            header(HeaderLocation . '/login');
             exit;
         }
         $this->productModel = $this->model('Product');
@@ -25,7 +25,7 @@ class Checkout extends BaseController
             $data = ['productData' => $productData];
             $this->view('Checkout', $data);
         } else {
-            header(HEADER_LOCATION . '/login/logout');
+            header(HeaderLocation . '/login/logout');
             exit;
         }
     }

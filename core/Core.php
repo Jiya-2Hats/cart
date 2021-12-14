@@ -9,9 +9,9 @@ class Core
 
   public function __construct()
   {
-    $this->currentController = DEFAULT_CONTROLLER;
-    $this->currentMethod = DEFAULT_METHOD;
-    $this->params = DEFAULT_PARAMETERS;
+    $this->currentController = DefaultController;
+    $this->currentMethod = DefaultMethod;
+    $this->params = DefaultParameters;
 
     $path = $this->getPath();
 

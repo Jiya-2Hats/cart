@@ -13,13 +13,13 @@ class BaseModel
 
     public function __construct()
     {
-        $conn = 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME;
+        $conn = 'mysql:host=' . DBHostname . ';dbname=' . DBName;
         $options = array(
             PDO::ATTR_PERSISTENT => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         );
         try {
-            $this->dbHandler = new PDO($conn, DB_USER, DB_PASS, $options);
+            $this->dbHandler = new PDO($conn, DBUser, DBPassword, $options);
         } catch (PDOException $e) {
             $this->error = $e->getMessage();
             echo $this->error;
