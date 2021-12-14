@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="<?= BaseURL ?>/app/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="<?= BASE_URL ?>/app/assets/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="<?= BaseURL ?>/app/assets/css/style.css" />
-    <link rel="stylesheet" href="<?= BaseURL ?>/app/assets/css/checkout.css" />
+    <link rel="stylesheet" href="<?= BASE_URL ?>/app/assets/css/style.css" />
+    <link rel="stylesheet" href="<?= BASE_URL ?>/app/assets/css/checkout.css" />
 
 </head>
 
@@ -30,11 +30,11 @@
                             <ul class="dropdown-menu  pb-0" aria-labelledby="dropdownMenuButton1">
                                 <li><span class="p-3 "><?= $_SESSION['name'] ?></span></li>
                                 <li><a class="dropdown-item" href="#"><?= $_SESSION['email'] ?></a></li>
-                        <li><a class="dropdown-item btn" href="<?= BaseURL ?>/login/logout">Logout</a></li>
+                        <li><a class="dropdown-item btn" href="<?= BASE_URL ?>/login/logout">Logout</a></li>
                         </ul>
                     </div> -->
                         <span class="px-3"><i class="fa fa-user px-2"></i><?= $_SESSION['name'] ?></span>
-                        <a href="<?= BaseURL ?>/login/logout">Logout</a>
+                        <a href="<?= BASE_URL ?>/login/logout">Logout</a>
 
                     </div>
                 </div>
@@ -53,8 +53,8 @@
                         $i = 0; ?>
 
                         <div class="col-sm-3 py-5">
-                            <form class="card productItem" method="POST" action="<?= BaseURL ?>/checkout">
-                                <img src="<?= BaseURL ?>/app/assets/images/default_product1.png" alt="Product Image" style="width:100%">
+                            <form class="card productItem" method="POST" action="<?= BASE_URL ?>/checkout">
+                                <img src="<?= BASE_URL ?>/app/assets/images/default_product1.png" alt="Product Image" style="width:100%">
 
                                 <div class="px-2 pt-5">
                                     <input type="hidden" name="productId" id="productId" value="<?= $item->id ?>">

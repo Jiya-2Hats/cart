@@ -15,9 +15,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="<?= BaseURL ?>/app/assets/css/style.css" />
-    <link rel="stylesheet" href="<?= BaseURL ?>/app/assets/css/checkout.css" />
-    <script src="<?= BaseURL ?>/app/assets/js/Config.js"></script>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/app/assets/css/style.css" />
+    <link rel="stylesheet" href="<?= BASE_URL ?>/app/assets/css/checkout.css" />
+    <script src="<?= BASE_URL ?>/app/assets/js/Config.js"></script>
     <script src="https://js.stripe.com/v3/"></script>
 
 </head>
@@ -38,14 +38,14 @@
                                 <div class="col-sm-4 px-4">
                                     <div class="col-sm-12 card p-2 mb-2 py-3 text-center ">
                                         <div class="row px-5">
-                                            <div class="col-sm-12"> <img src="<?= BaseURL ?>/app/assets/images/default_product1.png" alt="Product Image" style="width:80%">
+                                            <div class="col-sm-12"> <img src="<?= BASE_URL ?>/app/assets/images/default_product1.png" alt="Product Image" style="width:80%">
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="px-4 pt-3 ">
                                                     <h4><?= $productData[0]['name'] ?> </h4>
                                                     <p class="price" id="amount">Rs <?= $productData[0]['amount'] ?> </p>
                                                     <!-- <p><?= $productData[0]['description'] ?> </p> -->
-                                                    <span class="py-2 "> <a href="<?= BaseURL ?>/dashboard">Continue Shopping</a></span>
+                                                    <span class="py-2 "> <a href="<?= BASE_URL ?>/dashboard">Continue Shopping</a></span>
 
                                                 </div>
                                             </div>
@@ -189,8 +189,8 @@
     </div>
 
     <script src="https://js.stripe.com/v3/"></script>
-    <script src="<?= BaseURL ?>/app/assets/js/Checkout.js"></script>
-    <script src="<?= BaseURL ?>/app/assets/js/CheckoutFormTemplate.js"></script>
+    <script src="<?= BASE_URL ?>/app/assets/js/Checkout.js"></script>
+    <script src="<?= BASE_URL ?>/app/assets/js/CheckoutFormTemplate.js"></script>
     <!-- <script src="js/testcase.js"></script> -->
 </body>
 

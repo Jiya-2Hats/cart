@@ -14,7 +14,7 @@ class Login extends BaseController
     {
 
         if (SessionControl::checkSession()) {
-            header(HeaderLocation . '/dashboard');
+            header(HEADER_LOCATION . '/dashboard');
             exit;
         }
         $data = ["message" => $this->message];
@@ -31,7 +31,7 @@ class Login extends BaseController
                     $password = $_POST['password'];
                     $acc_status = $this->userModel->validateLogin($email, $password);
                     if ($acc_status == TRUE) {
-                        header(HeaderLocation . '/dashboard');
+                        header(HEADER_LOCATION . '/dashboard');
                         exit;
                     } else {
                         $this->message = "Invalid credientials";
@@ -50,10 +50,10 @@ class Login extends BaseController
     public function validateGuest()
     {
         try {
-            $GuestData = ['email' => GuestEmail, 'name' => GuestName];
+            $GuestData = ['email' => GUEST_EMAIL, 'name' => GUEST_NAME];
             $acc_status = SessionControl::createSession($GuestData);
             if ($acc_status == TRUE) {
-                header(HeaderLocation . '/dashboard');
+                header(HEADER_LOCATION . '/dashboard');
                 exit;
             }
         } catch (Exception $e) {

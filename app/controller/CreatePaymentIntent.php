@@ -8,7 +8,7 @@ class CreatePaymentIntent extends BaseController
 
     public function __construct()
     {
-        \Stripe\Stripe::setApiKey(StripeAPIKey);
+        \Stripe\Stripe::setApiKey(STRIPE_API_KEY);
         header('Content-Type: application/json');
         $this->productModel = $this->model('Product');
     }

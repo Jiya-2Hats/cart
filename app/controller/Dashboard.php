@@ -8,7 +8,7 @@ class Dashboard extends BaseController
     public function __construct()
     {
         if (!SessionControl::checkSession()) {
-            header(HeaderLocation . '/login');
+            header(HEADER_LOCATION . '/login');
             exit;
         }
 
