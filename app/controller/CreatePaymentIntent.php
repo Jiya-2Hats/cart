@@ -24,17 +24,12 @@ class CreatePaymentIntent extends BaseController
 
     public function index()
     {
-
         try {
-
-            // retrieve JSON from POST body
 
             $jsonStr = file_get_contents('php://input');
 
             $jsonObj = json_decode($jsonStr);
 
-
-            // Create a PaymentIntent with amount and currency
             $product_amount = $this->getAmount($jsonObj->id);
             if ($product_amount != 0) {
                 $paymentIntent = \Stripe\PaymentIntent::create([
