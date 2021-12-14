@@ -7,7 +7,7 @@ class User extends BaseModel
 
     public function validateLogin($email, $password)
     {
-        $sql2 = "select * from users where email=:email";
+        $sql2 = "select name,password,email,address_line1,address_line2,city,state,country,postal_code from users where email=:email";
         $this->prepare($sql2);
         $this->bindParameter(':email', $email);
         $result = $this->execute();
