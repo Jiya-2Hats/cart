@@ -9,7 +9,7 @@ class ProductOrder extends BaseController
         if (!SessionControl::checkSession()) {
             $this->redirectUrl("login");
         }
-        $this->productModel = $this->model('Product');
+        $this->orderModel = $this->model('Order');
     }
     public function index()
     {
@@ -18,7 +18,7 @@ class ProductOrder extends BaseController
             $getRequest = file_get_contents('php://input');
             $getData = json_decode($getRequest);
 
-            $placeOrder = $this->productModel->orderPlaced($getData);
+            $placeOrder = $this->orderModel->orderPlaced($getData);
             if ($placeOrder == true) {
                 $output = $this->getOrderSuccessMessage('status');
             } else {
@@ -37,7 +37,7 @@ class ProductOrder extends BaseController
             $data = [];
             if (isset($_GET['redirect_status'])) {
                 if ($_GET['redirect_status'] == 'succeeded') {
-                    $status = $this->productModel->UpdateOrderStatus($this->getOrderSuccessStatus(), $_GET['payment_intent_client_secret']);
+                    $status = $this->orderModel->updateOrderStatus($this->getOrderSuccessStatus(), $_GET['payment_intent_client_secret']);
                     $data['status'] = $status ?  $_GET['redirect_status'] : [];
                 }
             }
