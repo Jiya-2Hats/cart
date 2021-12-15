@@ -22,20 +22,8 @@
                 <div class="container-fluid">
                     <h1>Cart</h1>
                     <div class=" col-sm-2 text-right">
-
-                        <!-- <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa fa-user px-2"></i><?= $_SESSION['name'] ?>
-                            </button>
-                            <ul class="dropdown-menu  pb-0" aria-labelledby="dropdownMenuButton1">
-                                <li><span class="p-3 "><?= $_SESSION['name'] ?></span></li>
-                                <li><a class="dropdown-item" href="#"><?= $_SESSION['email'] ?></a></li>
-                        <li><a class="dropdown-item btn" href="<?= BASE_URL ?>/login/logout">Logout</a></li>
-                        </ul>
-                    </div> -->
                         <span class="px-3"><i class="fa fa-user px-2"></i><?= $_SESSION['name'] ?></span>
                         <a href="<?= BASE_URL ?>/login/logout">Logout</a>
-
                     </div>
                 </div>
             </nav>

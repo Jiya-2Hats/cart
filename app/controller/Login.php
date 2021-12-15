@@ -16,6 +16,12 @@ class Login extends BaseController
         if (SessionControl::checkSession()) {
             $this->redirectUrl("dashboard");
         }
+
+        $data = [
+            'css' => ['bootstrap.min.css', 'login.css'],
+            'js' => ['jquery/jquery.min.js', 'bootstrap/bootstrap.min.js']
+        ];
+        $this->view('Header', $data);
         $data = ["message" => $this->message];
         $this->view('Login', $data);
     }

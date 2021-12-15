@@ -44,7 +44,6 @@
                                                 <div class="px-4 pt-3 ">
                                                     <h4><?= $productData[0]['name'] ?> </h4>
                                                     <p class="price" id="amount">Rs <?= $productData[0]['amount'] ?> </p>
-                                                    <!-- <p><?= $productData[0]['description'] ?> </p> -->
                                                     <span class="py-2 "> <a href="<?= BASE_URL ?>/dashboard">Continue Shopping</a></span>
 
                                                 </div>
@@ -191,7 +190,6 @@
     <script src="https://js.stripe.com/v3/"></script>
     <script src="<?= BASE_URL ?>/app/assets/js/Checkout.js"></script>
     <script src="<?= BASE_URL ?>/app/assets/js/CheckoutFormTemplate.js"></script>
-    <!-- <script src="js/testcase.js"></script> -->
 </body>
 
 </html>

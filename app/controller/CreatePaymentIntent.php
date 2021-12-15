@@ -25,11 +25,8 @@ class CreatePaymentIntent extends BaseController
     public function index()
     {
         try {
-
             $jsonStr = file_get_contents('php://input');
-
             $jsonObj = json_decode($jsonStr);
-
             $product_amount = $this->getAmount($jsonObj->id);
             if ($product_amount != 0) {
                 $paymentIntent = \Stripe\PaymentIntent::create([
@@ -40,7 +37,6 @@ class CreatePaymentIntent extends BaseController
                         'enabled' => true,
                     ],
                 ]);
-
                 $output = [
                     'clientSecret' => $paymentIntent->client_secret,
                 ];
@@ -49,12 +45,9 @@ class CreatePaymentIntent extends BaseController
                     'clientSecret' => null,
                 ];
             }
-
             echo json_encode($output);
         } catch (Error $e) {
-
             http_response_code(500);
-
             echo json_encode(['error' => $e->getMessage()]);
         }
     }

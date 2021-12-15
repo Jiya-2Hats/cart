@@ -26,7 +26,6 @@ define('STRIPE_PUBLISHABLE_KEY', 'pk_test_51K444KSDyd8jioSTlcaX9034Z1RFjSEBzMr42
 
 
 //Product Order
-
 define('ORDER_SUCCESS_STATUS', 1);
 define('ORDER_FAILURE_STATUS', 0);
 define('ORDER_SUCCESS_MESSAGE', 'Order success');
