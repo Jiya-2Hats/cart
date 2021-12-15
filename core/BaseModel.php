@@ -53,26 +53,46 @@ class BaseModel
 
     public function execute()
     {
-        return $this->statement->execute();
+        try {
+            return $this->statement->execute();
+        } catch (PDOException $e) {
+            $this->error = $e->getMessage();
+            echo $this->error;
+        }
     }
 
 
     public function resultSet($type = "PDO::FETCH_OBJ")
     {
-        $this->execute();
-        return $this->statement->fetchAll($type);
+        try {
+            $this->execute();
+            return $this->statement->fetchAll($type);
+        } catch (PDOException $e) {
+            $this->error = $e->getMessage();
+            echo $this->error;
+        }
     }
 
 
     public function single()
     {
-        $this->execute();
-        return $this->statement->fetch(PDO::FETCH_OBJ);
+        try {
+            $this->execute();
+            return $this->statement->fetch(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            $this->error = $e->getMessage();
+            echo $this->error;
+        }
     }
 
 
     public function rowCount()
     {
-        return $this->statement->rowCount();
+        try {
+            return $this->statement->rowCount();
+        } catch (PDOException $e) {
+            $this->error = $e->getMessage();
+            echo $this->error;
+        }
     }
 }

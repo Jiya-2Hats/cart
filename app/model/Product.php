@@ -18,7 +18,7 @@ class Product extends BaseModel
             }
             return false;
         } catch (Exception $e) {
-            return $e->getMessage();
+            echo $e->getMessage();
         }
     }
 
@@ -35,7 +35,7 @@ class Product extends BaseModel
             }
             return false;
         } catch (Exception $e) {
-            return $e->getMessage();
+            echo  $e->getMessage();
         }
     }
 
@@ -49,7 +49,7 @@ class Product extends BaseModel
             $result = $this->resultSet(PDO::FETCH_ASSOC);
             return $result;
         } catch (Exception $e) {
-            return $e->getMessage();
+            echo $e->getMessage();
         }
     }
 }

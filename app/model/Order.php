@@ -42,7 +42,7 @@ class Order extends BaseModel
 
             return $result;
         } catch (Error $e) {
-            return $e->getMessage();
+            echo $e->getMessage();
         }
     }
 

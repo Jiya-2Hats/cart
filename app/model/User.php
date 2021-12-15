@@ -26,7 +26,6 @@ class User extends BaseModel
             }
         } catch (Exception $e) {
             echo $e->getMessage();
-            return false;
         }
     }
 }
