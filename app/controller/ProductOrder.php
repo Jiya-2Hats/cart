@@ -11,6 +11,7 @@ class ProductOrder extends BaseController
         }
         $this->orderModel = $this->model('Order');
     }
+
     public function index()
     {
         try {

@@ -14,10 +14,8 @@ class Checkout extends BaseController
 
     public function index()
     {
-        $data = [];
         if (!empty($_POST['productId'])) {
             $productId = $_POST['productId'];
-
             $productData = $this->productModel->select($productId);
             $data = ['productData' => $productData];
             $this->view('Checkout', $data);

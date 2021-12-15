@@ -5,6 +5,7 @@ use Core\BaseController\BaseController;
 class Login extends BaseController
 {
     private $message = "";
+
     public function __construct()
     {
         $this->userModel = $this->model('User');
