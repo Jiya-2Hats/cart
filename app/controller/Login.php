@@ -5,6 +5,8 @@ use Core\BaseController\BaseController;
 class Login extends BaseController
 {
     private $message = "";
+    private $email;
+    private $password;
 
     public function __construct()
     {
@@ -27,11 +29,10 @@ class Login extends BaseController
     {
         try {
             if (isset($_POST['login'])) {
-
-                if (!empty(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) && !empty($_POST['password'])) {
-                    $email = $_POST['email'];
-                    $password = $_POST['password'];
-                    $acc_status = $this->userModel->validateUserAndInitializeSession($email, $password);
+                $this->email = $_POST['email'];
+                $this->password = $_POST['password'];
+                if ($this->validateLoginInput()) {
+                    $acc_status = $this->userModel->validateUserAndInitializeSession($this->email, $this->password);
                     if ($acc_status == TRUE) {
                         $this->redirectUrl("dashboard");
                     } else {
@@ -46,6 +47,21 @@ class Login extends BaseController
         } catch (Exception $e) {
             echo $e->getMessage();
         }
+    }
+
+    private function validateLoginInput()
+    {
+        return ($this->validateEmail() && $this->validatePassword()) ? true : false;
+    }
+
+    private function validateEmail()
+    {
+        return (!empty(filter_var($this->email, FILTER_VALIDATE_EMAIL))) ? true : false;
+    }
+
+    private function validatePassword()
+    {
+        return (!empty($this->password)) ? true : false;
     }
 
     public function validateGuest()
