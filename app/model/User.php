@@ -8,7 +8,7 @@ class User extends BaseModel
     public function validateUserAndInitializeSession($email, $password)
     {
         try {
-            $sql2 = "select name,password,email,address_line1,address_line2,city,state,country,postal_code from users where email=:email";
+            $sql2 = "select name,password,email,phone,address_line1,address_line2,city,state,country,postal_code from users where email=:email";
             $this->prepare($sql2);
             $this->bindParameter(':email', $email);
             $result = $this->execute();
@@ -36,8 +36,8 @@ class User extends BaseModel
             $userData['password'] = password_hash($userData['password'], PASSWORD_DEFAULT);
             unset($userData['confirmPassword']);
 
-            $sql = "INSERT INTO users (email, name, password,address_line1,address_line2,city,state,country,postal_code) 
-                VALUES (:email, :name, :password,:addressLine1,:addressLine2,:city,:state,:country,:postalCode) ";
+            $sql = "INSERT INTO users (email, name, password,phone,address_line1,address_line2,city,state,country,postal_code) 
+                VALUES (:email, :name, :password,:phoneNumber,:addressLine1,:addressLine2,:city,:state,:country,:postalCode) ";
             $this->prepare($sql);
             $this->bindPDOParameter($userData);
             $result = $this->execute();

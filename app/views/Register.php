@@ -15,28 +15,28 @@
 
                         <div class="col-sm-6">
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="email">Email</label>
-                                <input type="email" id="email" class="form-control" name="email" placeholder="email address" required value="jiya@gmail.com" />
+                                <label class="form-label required" for="email">Email</label>
+                                <input type="email" id="email" class="form-control " name="email" placeholder="email address" required value="jiya@gmail.com" />
 
                             </div>
                             <div class="form-outline  mb-4">
-                                <label class="form-label" for="username">Username</label>
+                                <label class="form-label required" for="username">Username</label>
                                 <input type="text" id="username" class="form-control" name="username" required value="jiya" />
 
                             </div>
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="phoneNumber">Phone number</label>
+                                <label class="form-label " for="phoneNumber">Phone number</label>
                                 <input type="tel" id="phoneNumber" class="form-control" name="phoneNumber" required value="9568745869" />
 
                             </div>
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="password">Password</label>
+                                <label class="form-label required" for="password">Password</label>
                                 <input type="password" id="password" class="form-control" name="password" required />
 
                             </div>
 
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="confirmPassword">Confirm Password</label>
+                                <label class="form-label required" for="confirmPassword">Confirm Password</label>
                                 <input type="password" id="confirmPassword" class="form-control" name="confirmPassword" required />
 
                             </div>
@@ -86,7 +86,7 @@
                                 <input type="submit" class="btn  btn-outline-primary  btn-lg btn-block col-sm-10" name="register" value="Register">
 
                             </div>
-                            <div class="col-sm-6"><a href="index.php" class="px-5">Login</a></div>
+                            <div class="col-sm-6"><a href="<?= BASE_URL ?>" class="px-5">Login</a></div>
                         </div>
                     </div>
                     </form>

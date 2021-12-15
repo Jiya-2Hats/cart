@@ -65,7 +65,7 @@
                                 <div class="col-sm-12 mt-2" id="">
                                     <label for="shipPhone">Phone Number </label>
                                     <div class="col-sm-12 mb-2 ">
-                                        <input type="text" name="shipPhone" id="shipPhone" placeholder="Contact Number" class="inputfield py-2 px-2 Input col-sm-12" required>
+                                        <input type="text" name="shipPhone" id="shipPhone" placeholder="Contact Number" class="inputfield py-2 px-2 Input col-sm-12" required value="<?= (isset($_SESSION['phone']) ? $_SESSION['phone'] : "") ?>">
                                     </div>
                                 </div>
 

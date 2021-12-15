@@ -307,3 +307,9 @@ button:disabled {
     background-color: white;
     border: none;
 }
+
+
+label.required:after {
+    content: " *";
+    color: red;
+}

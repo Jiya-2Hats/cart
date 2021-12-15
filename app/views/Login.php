@@ -6,18 +6,18 @@
                 <form method="POST" id="login" class="col-sm-12" action="<?= BASE_URL ?>/login/validateUser">
 
                     <div class="width-text text-center ">
-                        <h5 class="pb-4 text-center">Login </h5>
+                        <h5 class="pb-4 text-center ">Login </h5>
                         <span class="text-danger text-small"><?= (!empty($data['message'])) ?  $data['message'] : ""; ?></span>
                     </div>
 
                     <div class="form-outline mb-4">
-                        <label class="form-label" for="email">Email</label>
+                        <label class="form-label required" for="email">Email</label>
                         <input type="text" id="email" class="form-control" name="email" placeholder="email address" value="" required />
 
                     </div>
 
                     <div class="form-outline mb-4">
-                        <label class="form-label" for="password">Password</label>
+                        <label class="form-label required" for="password">Password</label>
                         <input type="password" id="password" class="form-control" name="password" value="" required />
                         <br />
                         <a class="text-muted" href="#!">Forgot password?</a>
