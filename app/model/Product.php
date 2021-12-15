@@ -25,8 +25,6 @@ class Product extends BaseModel
     public function getProductAmount($id)
     {
         try {
-
-
             $sql = "SELECT amount FROM products where id=:id";
             $this->prepare($sql);
             $this->bindParameter(':id', $id);
@@ -52,7 +50,7 @@ class Product extends BaseModel
         return $result;
     }
 
-    public function placeOrder($orderData)
+    public function orderPlaced($orderData)
     {
         try {
 

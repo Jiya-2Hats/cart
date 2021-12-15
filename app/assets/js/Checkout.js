@@ -128,7 +128,7 @@ async function handleSubmit(e) {
 
 
 async function placeOrder() {
-    let url = baseUrl + '/checkout/productOrder';
+    let url = baseUrl + '/ProductOrder';
     const {
         orderStatus
     } = await fetch(url, {

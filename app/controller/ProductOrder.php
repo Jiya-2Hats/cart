@@ -2,7 +2,7 @@
 
 use Core\BaseController\BaseController;
 
-class Product extends BaseController
+class ProductOrder extends BaseController
 {
     public function __construct()
     {
@@ -12,13 +12,14 @@ class Product extends BaseController
         }
         $this->productModel = $this->model('Product');
     }
-    public function productOrder()
+    public function index()
     {
+
         try {
             $getRequest = file_get_contents('php://input');
             $getData = json_decode($getRequest);
 
-            $placeOrder = $this->productModel->placeOrder($getData);
+            $placeOrder = $this->productModel->orderPlaced($getData);
             if ($placeOrder == true) {
                 $output = [
                     'status' => 'success',
