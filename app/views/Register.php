@@ -8,9 +8,11 @@
                 <div class="row ">
                     <div class="width-text text-center ">
                         <h5 class="pb-4 text-center">Register </h5>
+                        <span class="text-danger text-small"><?= (!empty($data['message'])) ?  $data['message'] : ""; ?></span>
 
                     </div>
                     <form method="POST" class="usercard row" action="<?= BASE_URL ?>/register/registerUser">
+
                         <div class="col-sm-6">
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="email">Email</label>

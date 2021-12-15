@@ -22,6 +22,7 @@ class Register extends BaseController
 
         if (isset($_POST['register'])) {
             if (!empty($_POST['email']) && !empty($_POST['password'] && !empty($_POST['confirmPassword']) && !empty($_POST['username']))) {
+
                 $userData = array(
                     "password" => $_POST['password'],
                     "confirmPassword" => $_POST['confirmPassword'],
@@ -44,9 +45,8 @@ class Register extends BaseController
                             $this->redirectUrl("dashboard");
                         }
                     } else {
-                        echo "Already having an account with this data ";
-                        echo '<a href="' . BASE_URL . '/register.php">Register Again</a>';
-                        exit;
+                        $this->message = "Already having an account with this data ";
+                        $this->index();
                     }
                 }
             }

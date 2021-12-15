@@ -53,24 +53,16 @@ class BaseModel
 
     public function execute()
     {
-        try {
-            return $this->statement->execute();
-        } catch (PDOException $e) {
-            $this->error = $e->getMessage();
-            echo $this->error;
-        }
+
+        return $this->statement->execute();
     }
 
 
     public function resultSet($type = "PDO::FETCH_OBJ")
     {
-        try {
-            $this->execute();
-            return $this->statement->fetchAll($type);
-        } catch (PDOException $e) {
-            $this->error = $e->getMessage();
-            echo $this->error;
-        }
+
+        $this->execute();
+        return $this->statement->fetchAll($type);
     }
 
 

@@ -64,7 +64,7 @@ class User extends BaseModel
 
             return $result;
         } catch (Exception $e) {
-            echo $e->getMessage();
+            return false;
         }
     }
 }
