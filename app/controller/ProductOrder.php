@@ -17,7 +17,7 @@ class ProductOrder extends BaseController
         try {
             $getRequest = file_get_contents('php://input');
             $getData = json_decode($getRequest);
-
+            $getData->orderStatus = $this->getOrderFailureStatus();
             $placeOrder = $this->orderModel->orderPlaced($getData);
             if ($placeOrder == true) {
                 $output = $this->getOrderSuccessMessage('status');
@@ -53,6 +53,10 @@ class ProductOrder extends BaseController
     private function getOrderSuccessStatus()
     {
         return ORDER_SUCCESS_STATUS;
+    }
+    private function getOrderFailureStatus()
+    {
+        return ORDER_FAILURE_STATUS;
     }
 
     private function getOrderSuccessMessage($messageIndex)
