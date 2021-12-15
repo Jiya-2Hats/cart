@@ -7,8 +7,7 @@ class ProductOrder extends BaseController
     public function __construct()
     {
         if (!SessionControl::checkSession()) {
-            header(HEADER_LOCATION . '/login');
-            exit;
+            $this->redirectUrl("login");
         }
         $this->productModel = $this->model('Product');
     }
@@ -34,5 +33,17 @@ class ProductOrder extends BaseController
             http_response_code(500);
             echo json_encode($e->getMessage());
         }
+    }
+
+    public function checkoutSuccess()
+    {
+        $data = [];
+        if (isset($_GET['redirect_status'])) {
+            if ($_GET['redirect_status'] == 'succeeded') {
+                $status = $this->productModel->UpdateOrderStatus(1, $_GET['payment_intent_client_secret']);
+                $data['status'] = $status ?  $_GET['redirect_status'] : [];
+            }
+        }
+        $this->view("CheckoutSuccess", $data);
     }
 }

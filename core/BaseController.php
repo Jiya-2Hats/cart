@@ -18,4 +18,10 @@ class BaseController
             die("View does not exists.");
         }
     }
+
+    public function redirectUrl($path)
+    {
+        header(HEADER_LOCATION . "/" . $path);
+        exit;
+    }
 }

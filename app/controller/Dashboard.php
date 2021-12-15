@@ -8,8 +8,7 @@ class Dashboard extends BaseController
     public function __construct()
     {
         if (!SessionControl::checkSession()) {
-            header(HEADER_LOCATION . '/login');
-            exit;
+            $this->redirectUrl("login");
         }
 
         $this->productModel = $this->model('Product');
