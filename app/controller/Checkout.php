@@ -14,9 +14,7 @@ class Checkout extends BaseController
 
     public function index()
     {
-
         $data = [];
-
         if (!empty($_POST['productId'])) {
             $productId = $_POST['productId'];
 
@@ -24,7 +22,7 @@ class Checkout extends BaseController
             $data = ['productData' => $productData];
             $this->view('Checkout', $data);
         } else {
-            // $this->redirectUrl("login/logout");
+            $this->redirectUrl("login/logout");
         }
     }
 }

@@ -65,7 +65,7 @@ async function handleSubmit(e) {
 
     placeOrder();
     //  console.log("ff" + orderStatus);
-    let url = baseUrl + '/ProductOrder/checkoutSuccess';
+    let url = baseUrl + '/ProductOrder/updateOrderOnCheckoutSuccess';
     const {
         error
     } = await stripe.confirmPayment({
