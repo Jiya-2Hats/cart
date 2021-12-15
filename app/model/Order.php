@@ -46,7 +46,7 @@ class Order extends BaseModel
         }
     }
 
-    public function updateOrderStatus($status, $clientSecret)
+    public function updateStatus($status, $clientSecret)
     {
 
         $orderUpdate = 'UPDATE orders SET order_status = :status WHERE  stripe_client_secret=:clientSecret ';
