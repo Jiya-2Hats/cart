@@ -18,18 +18,19 @@ class Order extends BaseModel
             $this->prepare($order);
             $this->bindPDOParameter($orderData);
             $result = $this->execute();
-
             return $result;
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
     }
+
     private function bindPDOParameter($orderData)
     {
         foreach ($orderData as $orderKey => $orderItem) {
             $this->bindParameter(':' . $orderKey, $orderItem);
         }
     }
+
     public function updateStatus($status, $clientSecret)
     {
         try {
