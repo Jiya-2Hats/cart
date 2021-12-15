@@ -12,12 +12,9 @@ class Login extends BaseController
 
     public function index($page = "")
     {
-
         if (SessionControl::checkSession()) {
             $this->redirectUrl("dashboard");
         }
-
-
         $data = ["message" => $this->message];
         $this->view('Login', $data);
     }
@@ -35,7 +32,7 @@ class Login extends BaseController
                         $this->redirectUrl("dashboard");
                     } else {
                         $this->message = "Invalid credientials";
-                        $data = ["message" => $this->message];
+                        $this->index();
                     }
                 } else {
                     $this->message = "Please provide valid credientials";

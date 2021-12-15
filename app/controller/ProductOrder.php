@@ -13,7 +13,6 @@ class ProductOrder extends BaseController
     }
     public function index()
     {
-
         try {
             $getRequest = file_get_contents('php://input');
             $getData = json_decode($getRequest);
