@@ -16,8 +16,11 @@ class Login extends BaseController
         if (SessionControl::checkSession()) {
             $this->redirectUrl("dashboard");
         }
+        $data = ["css" => ['login.css']];
+        $this->view('Header', $data);
         $data = ["message" => $this->message];
         $this->view('Login', $data);
+        $this->view('Footer');
     }
 
     public function validateUser()

@@ -14,7 +14,10 @@ class Dashboard extends BaseController
 
     public function index()
     {
+        $data = ["css" => ['style.css', 'checkout.css']];
+        $this->view('Header', $data);
         $data = ["productData" => $this->productModel->list()];
         $this->view('Home', $data);
+        $this->view('Footer');
     }
 }

@@ -1,5 +1,5 @@
 const stripe = Stripe("pk_test_51K444KSDyd8jioSTlcaX9034Z1RFjSEBzMr42g2MR8JD19e2pXBOeXsbxlLY2631cdVRdnMUrG3xfZ6vzrENqbmx000jUbT4yx");
-// const baseUrl = 'http://localhost/cart';
+
 
 
 let elements, id, amount, clientSecretKey;
@@ -16,7 +16,7 @@ if (document.getElementsByName('payment-form').length > 0 && document.getElement
 }
 
 
-// Fetches a payment intent and captures the client secret
+
 
 
 
@@ -64,7 +64,7 @@ async function handleSubmit(e) {
     setLoading(true);
 
     placeOrder();
-    //  console.log("ff" + orderStatus);
+
     let url = baseUrl + '/ProductOrder/updateOrderOnCheckoutSuccess';
     const {
         error
@@ -73,9 +73,6 @@ async function handleSubmit(e) {
         elements,
 
         confirmParams: {
-
-            // Make sure to change this to your payment completion page
-
             return_url: url,
             payment_method_data: {
                 billing_details: {
@@ -216,7 +213,7 @@ async function checkStatus() {
 }
 
 
-// ------- UI helpers -------
+
 
 
 function showMessage(messageText) {
@@ -240,14 +237,9 @@ function showMessage(messageText) {
 
 }
 
-
-// Show a spinner on payment submission
-
 function setLoading(isLoading) {
 
     if (isLoading) {
-
-        // Disable the button and show a spinner
 
         document.querySelector("#submit").disabled = true;
 
