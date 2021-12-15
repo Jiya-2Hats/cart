@@ -153,8 +153,6 @@
                                 </button>
                                 <div id="payment-message" class="hidden"></div>
                             </div>
-
-
                         </div>
                     </form>
                 </div>

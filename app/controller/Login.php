@@ -31,7 +31,7 @@ class Login extends BaseController
                 if (!empty(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) && !empty($_POST['password'])) {
                     $email = $_POST['email'];
                     $password = $_POST['password'];
-                    $acc_status = $this->userModel->validateLogin($email, $password);
+                    $acc_status = $this->userModel->validateUserAndInitializeSession($email, $password);
                     if ($acc_status == TRUE) {
                         $this->redirectUrl("dashboard");
                     } else {

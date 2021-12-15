@@ -5,7 +5,7 @@ use Core\BaseModel\BaseModel;
 class User extends BaseModel
 {
 
-    public function validateLogin($email, $password)
+    public function validateUserAndInitializeSession($email, $password)
     {
         $sql2 = "select name,password,email,address_line1,address_line2,city,state,country,postal_code from users where email=:email";
         $this->prepare($sql2);
