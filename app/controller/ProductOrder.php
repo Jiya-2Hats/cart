@@ -35,12 +35,14 @@ class ProductOrder extends BaseController
     {
         try {
             $data = [];
+            $this->view('Header', $data);
             if (isset($_GET['redirect_status'])) {
                 if ($_GET['redirect_status'] == 'succeeded') {
                     $status = $this->orderModel->updateStatus($this->getOrderSuccessStatus(), $_GET['payment_intent_client_secret']);
                     $data['status'] = $status ?  $_GET['redirect_status'] : [];
                 }
             }
+
             $this->view("CheckoutSuccess", $data);
         } catch (Error $e) {
             http_response_code(500);
