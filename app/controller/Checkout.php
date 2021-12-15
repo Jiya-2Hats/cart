@@ -26,7 +26,7 @@ class Checkout extends BaseController
             $this->view('Checkout', $data);
             unset($data);
             $data = [
-                'js' => ['Checkout.js', 'CheckoutFormTemplate.js']
+                'js' => PAYMENT_GATEWAY_JS
             ];
             $this->view('Footer', $data);
         } else {

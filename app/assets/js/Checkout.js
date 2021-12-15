@@ -15,11 +15,6 @@ if (document.getElementsByName('payment-form').length > 0 && document.getElement
 
 }
 
-
-
-
-
-
 async function initialize() {
 
     let url = baseUrl + '/StripePayment';
@@ -65,7 +60,7 @@ async function handleSubmit(e) {
 
     placeOrder();
 
-    let url = baseUrl + '/ProductOrder/updateOrderOnCheckoutSuccess';
+    let url = baseUrl + '/StripePayment/updateOrderOnCheckoutSuccess';
     const {
         error
     } = await stripe.confirmPayment({
@@ -125,7 +120,7 @@ async function handleSubmit(e) {
 
 
 async function placeOrder() {
-    let url = baseUrl + '/ProductOrder';
+    let url = baseUrl + '/StripePayment/productOrder';
     const {
         orderStatus
     } = await fetch(url, {

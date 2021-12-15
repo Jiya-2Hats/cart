@@ -12,8 +12,18 @@ class Core
     $this->currentController = DEFAULT_CONTROLLER;
     $this->currentMethod = DEFAULT_METHOD;
     $this->params = DEFAULT_PARAMETERS;
-
+    $this->currentService = "";
     $path = $this->getPath();
+    if (ucwords($path[0]) == "service") {
+
+      if (file_exists('app/service/' . $path[1] . ucwords($path[2]) . '.php')) {
+        $this->currentService = ucwords($path[2]);
+        unset($path);
+        require_once 'app/service/' . $this->currentService . '.php';
+        $this->currentService = new $this->currentService;
+        call_user_func_array([$this->currentService, 'index'], []);
+      }
+    }
 
     if (file_exists('app/controller/' . ucwords($path[0]) . '.php')) {
       $this->currentController = ucwords($path[0]);
