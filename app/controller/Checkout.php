@@ -24,6 +24,7 @@ class Checkout extends BaseController
             $this->view('Header', $data);
             $data = ['productData' => $productData];
             $this->view('Checkout', $data);
+            unset($data);
             $data = [
                 'js' => ['Checkout.js', 'CheckoutFormTemplate.js']
             ];
