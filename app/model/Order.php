@@ -16,7 +16,7 @@ class Order extends BaseModel
             $order = 'INSERT INTO orders(product_id, bill_name, bill_address_line1, bill_address_line2, bill_city, bill_state,bill_country,bill_postal_code,ship_name,ship_phone,ship_address_line1, ship_address_line2, ship_city,ship_state, ship_country, ship_postal_code,order_status, stripe_client_secret) 
                                         values(:productId,:billName,:billLine1,:billLine2,:billCity,:billState,:billCountry,:billPostalCode,:shipName,:shipPhone,:shipLine1,:shipLine2,:shipCity,:shipState,:shipCountry,:shipPostalCode,:orderStatus,:clientSecretKey) ';
             $this->prepare($order);
-            $this->bindOrderParam($orderData);
+            $this->bindOrderParameter($orderData);
             $result = $this->execute();
 
             return $result;
@@ -24,7 +24,7 @@ class Order extends BaseModel
             echo $e->getMessage();
         }
     }
-    private function bindOrderParam($orderData)
+    private function bindOrderParameter($orderData)
     {
         foreach ($orderData as $orderKey => $orderItem) {
             $this->bindParameter(':' . $orderKey, $orderItem);
