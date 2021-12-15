@@ -41,12 +41,15 @@ class Product extends BaseModel
 
     public function select($id)
     {
-
-        $sql = "SELECT id,name,description,amount FROM products where id=:id";
-        $this->prepare($sql);
-        $this->bindParameter(':id', $id, PDO::PARAM_INT);
-        $result = $this->execute();
-        $result = $this->resultSet(PDO::FETCH_ASSOC);
-        return $result;
+        try {
+            $sql = "SELECT id,name,description,amount FROM products where id=:id";
+            $this->prepare($sql);
+            $this->bindParameter(':id', $id, PDO::PARAM_INT);
+            $result = $this->execute();
+            $result = $this->resultSet(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
 }

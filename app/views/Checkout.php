@@ -1,19 +1,13 @@
 <script src="https://js.stripe.com/v3/"></script>
-
-
-
-
 <div class="container ">
     <?php if (!empty($data['productData'])) {
         $productData = $data['productData']; ?>
         <div class="row py-5 mt-5 px-5">
-
             <div class="col-sm-12 px-5">
-
                 <div class="row">
-
                     <form class="col-sm-12" id="payment-form" name="payment-form">
                         <div class="row">
+
                             <div class="col-sm-4 px-4">
                                 <div class="col-sm-12 card p-2 mb-2 py-3 text-center ">
                                     <div class="row px-5">
@@ -126,9 +120,6 @@
 
                             </div>
 
-
-
-
                             <div class="col-sm-4 px-4">
                                 <div class="col-sm-12 mb-2">
                                     <label for="email">Email </label>
@@ -138,7 +129,6 @@
                                     <label for="billName">Name on card </label>
                                     <input type="text" name="billName" id="billName" placeholder="" class="inputfield py-2 px-3 Input col-sm-12" required value="<?= (isset($_SESSION['name']) ? $_SESSION['name'] : "") ?>">
                                 </div>
-
 
                                 <input type="hidden" name="productId" id="productId" value="<?= $productData[0]['id'] ?>">
                                 <div id="payment-element"></div>
@@ -159,7 +149,6 @@
             </div>
         </div>
     <?php
-
     }
     ?>
 </div>
