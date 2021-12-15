@@ -16,7 +16,7 @@ class Dashboard extends BaseController
 
     public function index()
     {
-        $data = ["productData" => $this->productModel->getProductList()];
+        $data = ["productData" => $this->productModel->list()];
         $this->view('Home', $data);
     }
 }

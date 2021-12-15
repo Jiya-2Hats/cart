@@ -6,7 +6,7 @@ class Product extends BaseModel
 {
 
 
-    public function getProductList()
+    public function list()
     {
         try {
             $sql2 = "SELECT * FROM products";
@@ -22,7 +22,7 @@ class Product extends BaseModel
         }
     }
 
-    public function getProductAmount($id)
+    public function amount($id)
     {
         try {
             $sql = "SELECT amount FROM products where id=:id";
@@ -39,10 +39,10 @@ class Product extends BaseModel
         }
     }
 
-    public function getCurrentProduct($id)
+    public function select($id)
     {
 
-        $sql = "SELECT * FROM products where id=:id";
+        $sql = "SELECT id,name,description,amount FROM products where id=:id";
         $this->prepare($sql);
         $this->bindParameter(':id', $id, PDO::PARAM_INT);
         $result = $this->execute();

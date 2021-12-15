@@ -18,7 +18,7 @@ class Checkout extends BaseController
         if (!empty($_POST['productId'])) {
             $productId = $_POST['productId'];
 
-            $productData = $this->productModel->getCurrentProduct($productId);
+            $productData = $this->productModel->select($productId);
             $data = ['productData' => $productData];
             $this->view('Checkout', $data);
         } else {

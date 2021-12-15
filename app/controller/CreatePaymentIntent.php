@@ -15,7 +15,7 @@ class CreatePaymentIntent extends BaseController
 
     private function getAmount($id): int
     {
-        $amount = $this->productModel->getProductAmount($id);
+        $amount = $this->productModel->amount($id);
         if (is_array($amount)) {
             return $amount[0]['amount'] * 100;
         }
