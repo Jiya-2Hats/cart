@@ -2,8 +2,9 @@
 
 use Core\BaseController\BaseController;
 
-class CreatePaymentIntent extends BaseController
+class StripePayment extends BaseController
 {
+    private $product_amount = 0;
     public function __construct()
     {
         \Stripe\Stripe::setApiKey(STRIPE_API_KEY);
@@ -16,28 +17,28 @@ class CreatePaymentIntent extends BaseController
         try {
             $jsonStr = file_get_contents('php://input');
             $jsonObj = json_decode($jsonStr);
-            $product_amount = $this->getAmount($jsonObj->id);
-            if ($product_amount != 0) {
-                $paymentIntent = \Stripe\PaymentIntent::create([
-                    'amount' => $product_amount,
-                    'currency' => 'inr',
-                    'automatic_payment_methods' => [
-                        'enabled' => true,
-                    ],
-                ]);
-                $output = [
-                    'clientSecret' => $paymentIntent->client_secret,
-                ];
-            } else {
-                $output = [
-                    'clientSecret' => null,
-                ];
+            $this->product_amount = $this->getAmount($jsonObj->id);
+            if ($this->product_amount != 0) {
+
+                echo json_encode($this->createPaymentIntent());
             }
-            echo json_encode($output);
         } catch (Error $e) {
             http_response_code(500);
             echo json_encode(['error' => $e->getMessage()]);
         }
+    }
+
+    public function createPaymentIntent()
+    {
+        $paymentIntent = \Stripe\PaymentIntent::create([
+            'amount' => $this->product_amount,
+            'currency' => 'inr',
+            'automatic_payment_methods' => [
+                'enabled' => true,
+            ],
+        ]);
+        $output['clientSecret'] = $paymentIntent->client_secret ??  null;
+        return $output;
     }
 
     private function getAmount($id): int

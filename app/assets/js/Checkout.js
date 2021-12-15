@@ -22,7 +22,7 @@ if (document.getElementsByName('payment-form').length > 0 && document.getElement
 
 async function initialize() {
 
-    let url = baseUrl + '/CreatePaymentIntent';
+    let url = baseUrl + '/StripePayment';
 
     const {
         clientSecret
