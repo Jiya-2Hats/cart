@@ -42,6 +42,7 @@ class Checkout extends BaseController
         $jsonObj = json_decode(file_get_contents('php://input'));
         $this->product_amount = $this->getAmount($jsonObj->id);
         if ($this->product_amount != 0) {
+
             $serviceStatus =  $this->paymentService->createPaymentIntent($this->product_amount);
             if (isset($serviceStatus['error'])) {
                 http_response_code(500);
@@ -59,24 +60,6 @@ class Checkout extends BaseController
         return 0;
     }
 
-    public function productOrder()
-    {
-        try {
-            $getRequest = file_get_contents('php://input');
-            $getData = json_decode($getRequest);
-            $getData->orderStatus = ORDER_FAILURE_STATUS;
-            $placeOrder = $this->orderModel->orderPlaced($getData);
-            if ($placeOrder == true) {
-                $output = ['status' => ORDER_SUCCESS_MESSAGE];
-            } else {
-                $output = ['status' => ORDER_FAILURE_MESSAGE];
-            }
-            json_encode($output);
-        } catch (Error $e) {
-            http_response_code(500);
-            echo json_encode($e->getMessage());
-        }
-    }
 
 
     public function successPaymentURL()
@@ -84,11 +67,14 @@ class Checkout extends BaseController
         try {
             $data = [];
             $this->view('Header', $data);
+
             $orderStatus = $this->paymentService->getStatus($_GET);
+
             if ($orderStatus['paymentStatus']) {
                 $status = $this->orderModel->updateStatus($orderStatus['orderStatus'], $orderStatus['orderClientSecret']);
                 $data['status'] = $status ? $orderStatus['orderStatusMessage'] : [];
             }
+
             $this->view("CheckoutSuccess", $data);
         } catch (Error $e) {
             http_response_code(500);
