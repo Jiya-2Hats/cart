@@ -10,6 +10,7 @@ class Dashboard extends BaseController
         if (!SessionControl::checkSession()) {
             $this->redirectUrl("login");
         }
+
         $this->productModel = $this->model('Product');
     }
 
