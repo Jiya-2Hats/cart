@@ -24,4 +24,19 @@ class BaseController
         header(HEADER_LOCATION . "/" . $path);
         exit;
     }
+
+    public function service($serviceFile)
+    {
+
+        if (file_exists('app/service/' . $serviceFile . '.php')) {
+            require_once 'app/service/' . $serviceFile . '.php';
+
+            $serviceFile = explode('/', filter_var($serviceFile, FILTER_SANITIZE_URL));
+            $serviceFile = end($serviceFile);
+
+            return new $serviceFile();
+        } else {
+            die("Service does not exists.");
+        }
+    }
 }

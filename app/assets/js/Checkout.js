@@ -17,7 +17,7 @@ if (document.getElementsByName('payment-form').length > 0 && document.getElement
 
 async function initialize() {
 
-    let url = baseUrl + '/StripePayment';
+    let url = baseUrl + '/Checkout/initialise';
 
     const {
         clientSecret
@@ -60,7 +60,7 @@ async function handleSubmit(e) {
 
     placeOrder();
 
-    let url = baseUrl + '/StripePayment/updateOrderOnCheckoutSuccess';
+    let url = baseUrl + '/checkout/updateOrderOnCheckoutSuccess';
     const {
         error
     } = await stripe.confirmPayment({

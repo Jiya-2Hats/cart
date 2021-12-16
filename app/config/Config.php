@@ -20,7 +20,7 @@ define('DB_USER', 'root');
 define('DB_PASSWORD', 'admin');
 define('DB_NAME', 'cart');
 
-define('PAYMENT_GATEWAY', 'StripePayment');
+define('PAYMENT_GATEWAY', 'Stripe');
 define('PAYMENT_GATEWAY_JS', ['Checkout.js', 'CheckoutFormTemplate.js']);
 
 // Stripe configuration
