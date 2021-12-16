@@ -29,9 +29,9 @@ class ProductOrder extends BaseController
                 $output = ['status' => ORDER_FAILURE_MESSAGE];
             }
             json_encode($output);
-        } catch (Error $e) {
+        } catch (Exception $exception) {
             http_response_code(500);
-            echo json_encode($e->getMessage());
+            echo json_encode($exception->getMessage());
         }
     }
 }

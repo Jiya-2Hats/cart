@@ -42,20 +42,26 @@ class Checkout extends BaseController
 
     public function initialise()
     {
-        $jsonObj = json_decode(file_get_contents('php://input'));
-        $this->product_amount = $this->getAmount($jsonObj->id);
-        if ($this->product_amount != 0) {
+        try {
+            $jsonObj = json_decode(file_get_contents('php://input'));
+            $this->product_amount = $this->getAmount($jsonObj->id);
+            if ($this->product_amount != 0) {
 
-            $serviceStatus =  $this->paymentService->createPaymentIntent($this->product_amount);
-            if (isset($serviceStatus['error'])) {
-                http_response_code(500);
+                $serviceStatus =  $this->paymentService->createPaymentIntent($this->product_amount);
+                if (isset($serviceStatus['error'])) {
+                    http_response_code(500);
+                }
+                echo  json_encode($serviceStatus);
             }
-            echo  json_encode($serviceStatus);
+        } catch (Exception $exception) {
+            http_response_code(500);
+            echo json_encode($exception->getMessage());
         }
     }
 
     private function getAmount($id): int
     {
+
         $amount = $this->productModel->amount($id);
         if (is_array($amount)) {
             return $amount[0]['amount'] * 100;
@@ -77,9 +83,9 @@ class Checkout extends BaseController
             }
 
             $this->view("CheckoutSuccess", $data);
-        } catch (Error $e) {
-            http_response_code(500);
-            echo json_encode($e->getMessage());
+        } catch (Error $error) {
+
+            echo $error->getMessage();
         }
     }
 }

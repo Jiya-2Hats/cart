@@ -45,8 +45,8 @@ class Login extends BaseController
                     $this->index();
                 }
             }
-        } catch (Exception $e) {
-            echo $e->getMessage();
+        } catch (Exception $exception) {
+            echo $exception->getMessage();
         }
     }
 
@@ -73,14 +73,18 @@ class Login extends BaseController
             if ($acc_status == TRUE) {
                 $this->redirectUrl("dashboard");
             }
-        } catch (Exception $e) {
-            echo $e->getMessage();
+        } catch (Exception $exception) {
+            echo $exception->getMessage();
         }
     }
 
     public function logout()
     {
-        SessionControl::sessionDestroy();
-        $this->redirectUrl("login");
+        try {
+            SessionControl::sessionDestroy();
+            $this->redirectUrl("login");
+        } catch (Exception $exception) {
+            echo $exception->getMessage();
+        }
     }
 }
