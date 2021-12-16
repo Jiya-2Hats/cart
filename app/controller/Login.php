@@ -7,6 +7,7 @@ class Login extends BaseController
     private $message = "";
     private $email;
     private $password;
+    private $userModel;
 
     public function __construct()
     {

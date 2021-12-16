@@ -5,6 +5,9 @@ use Core\BaseController\BaseController;
 class Checkout extends BaseController
 {
     private  $paymentService = "";
+    private $productModel;
+    private $orderModel;
+
     public function __construct()
     {
         if (!SessionControl::checkSession()) {
@@ -59,8 +62,6 @@ class Checkout extends BaseController
         }
         return 0;
     }
-
-
 
     public function successPaymentURL()
     {

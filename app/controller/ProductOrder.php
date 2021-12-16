@@ -5,6 +5,7 @@ use Core\BaseController\BaseController;
 
 class ProductOrder extends BaseController
 {
+    private $orderModel = "";
 
     public function __construct()
     {
@@ -14,7 +15,6 @@ class ProductOrder extends BaseController
 
         $this->orderModel = $this->model('Order');
     }
-
 
     public function placeOrder()
     {

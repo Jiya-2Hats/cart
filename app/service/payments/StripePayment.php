@@ -4,7 +4,6 @@ use Payment\Payment\Payment;
 
 class StripePayment implements Payment
 {
-    private $product_amount = 0;
     public function __construct()
     {
         \Stripe\Stripe::setApiKey(PAYMENT_API_KEY);

@@ -4,6 +4,7 @@ use Core\BaseController\BaseController;
 
 class Dashboard extends BaseController
 {
+    private $productModel;
     public function __construct()
     {
         if (!SessionControl::checkSession()) {

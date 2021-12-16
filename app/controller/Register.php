@@ -5,6 +5,7 @@ use Core\BaseController\BaseController;
 class Register extends BaseController
 {
     private $message = "";
+    private $userModel;
     public function __construct()
     {
         $this->userModel = $this->model('User');
@@ -23,9 +24,8 @@ class Register extends BaseController
             $this->redirectUrl('register');
         }
         if (!$this->checkRequiredRegisterInput()) {
-            $this->message = "Required fields cannot be empty";
-            $this->index();
-            exit;
+            $statusMessage = "Required fields cannot be empty";
+            $this->retryRegisteration($statusMessage);
         }
 
         $userData = array(
@@ -42,19 +42,28 @@ class Register extends BaseController
             "country" => $_POST['country'],
         );
 
+        if ($userData["password"] != $userData["confirmPassword"]) {
 
-        if ($userData["password"] == $userData["confirmPassword"]) {
-            $acc_status = $this->userModel->createUser($userData);
-            if ($acc_status == TRUE) {
-                $acc_status = SessionControl::createSession($userData);
-                if ($acc_status == true) {
-                    $this->redirectUrl("dashboard");
-                }
-            } else {
-                $this->message = "Already having an account with this data ";
-                $this->index();
-            }
+            $statusMessage = "Password Doesn't match";
+            $this->retryRegisteration($statusMessage);
         }
+        $acc_status = $this->userModel->createUser($userData);
+        if ($acc_status == TRUE) {
+            $acc_status = SessionControl::createSession($userData);
+            if ($acc_status == true) {
+                $this->redirectUrl("dashboard");
+            }
+        } else {
+            $statusMessage = "Already having an account with this data ";
+            $this->retryRegisteration($statusMessage);
+        }
+    }
+
+    private function retryRegisteration($message)
+    {
+        $this->message = $message;
+        $this->index();
+        exit;
     }
 
     public function checkRequiredRegisterInput()
