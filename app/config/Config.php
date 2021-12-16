@@ -21,7 +21,7 @@ define('DB_PASSWORD', 'admin');
 define('DB_NAME', 'cart');
 
 define('PAYMENT_GATEWAY', 'Paypal');
-define('PAYMENT_GATEWAY_JS', ['Checkout.js', 'CheckoutFormTemplate.js']);
+define('PAYMENT_GATEWAY_JS', ['PaypalCheckout.js', 'CheckoutFormTemplate.js']);
 
 // Stripe configuration
 define('PAYMENT_API_KEY', 'sk_test_51K444KSDyd8jioSTszLKklBta1Sz2sonZO6DCYU0Rr8f711Z4Mkxl5fzxppGmd8FWdCk5MBHilmKZSxbEg4hy7Tk00MMyxfPCK');
