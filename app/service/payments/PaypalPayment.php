@@ -12,7 +12,6 @@ class PaypalPayment implements Payment
     public function createPaymentIntent($amount)
     {
         try {
-
             $paymentIntent = \Stripe\PaymentIntent::create([
                 'amount' => $amount,
                 'currency' => 'inr',
@@ -28,27 +27,14 @@ class PaypalPayment implements Payment
         }
     }
 
-    public function getStatus()
+    public function getStatus($getData)
     {
         $status = [
-            "paymentStatus" => false,
-            "orderStatus" => ORDER_FAILURE_STATUS,
-            "orderStatusMessage" => ORDER_FAILURE_MESSAGE
+            "paymentStatus" => true,
+            "orderStatus" => ORDER_SUCCESS_STATUS,
+            "orderStatusMessage" => ORDER_SUCCESS_MESSAGE,
+            "orderClientSecret" => $getData['payment_intent_client_secret']
         ];
-        try {
-            if (isset($_GET['redirect_status'])) {
-                if ($_GET['redirect_status'] == 'succeeded') {
-                    $status = [
-                        "paymentStatus" => true,
-                        "orderStatus" => ORDER_SUCCESS_STATUS,
-                        "orderStatusMessage" => ORDER_SUCCESS_MESSAGE,
-                        "orderClientSecret" => $_GET['payment_intent_client_secret']
-                    ];
-                }
-            }
-            return $status;
-        } catch (Error $e) {
-            return $status;
-        }
+        return $status;
     }
 }

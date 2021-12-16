@@ -48,7 +48,6 @@ class Checkout extends BaseController
             $jsonObj = json_decode(file_get_contents('php://input'));
             $this->product_amount = $this->getAmount($jsonObj->id);
             if ($this->product_amount != 0) {
-
                 $serviceStatus =  $this->paymentService->createPaymentIntent($this->product_amount);
                 if (isset($serviceStatus['error'])) {
                     http_response_code(500);

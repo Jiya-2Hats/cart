@@ -28,7 +28,7 @@ class StripePayment implements Payment
         }
     }
 
-    public function getStatus()
+    public function getStatus($getData)
     {
         $status = [
             "paymentStatus" => false,
@@ -36,13 +36,13 @@ class StripePayment implements Payment
             "orderStatusMessage" => ORDER_FAILURE_MESSAGE
         ];
         try {
-            if (isset($_GET['redirect_status'])) {
-                if ($_GET['redirect_status'] == 'succeeded') {
+            if (isset($getData['redirect_status'])) {
+                if ($getData['redirect_status'] == 'succeeded') {
                     $status = [
                         "paymentStatus" => true,
                         "orderStatus" => ORDER_SUCCESS_STATUS,
                         "orderStatusMessage" => ORDER_SUCCESS_MESSAGE,
-                        "orderClientSecret" => $_GET['payment_intent_client_secret']
+                        "orderClientSecret" => $getData['payment_intent_client_secret']
                     ];
                 }
             }

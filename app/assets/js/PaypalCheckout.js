@@ -7,48 +7,30 @@ let elements, id, amount, clientSecretKey;
 
 initialize();
 
-checkStatus();
-
-
 if (document.getElementsByName('payment-form').length > 0 && document.getElementsByName('productId').length > 0) {
     document.querySelector("#payment-form").addEventListener("submit", handleSubmit);
-
 }
 
 async function initialize() {
-
     let url = baseUrl + '/Checkout/initialise';
-
     const {
         clientSecret
     } = await fetch(url, {
-
         method: "POST",
-
         headers: {
             "Content-Type": "application/json"
         },
-
         body: JSON.stringify({
             id: document.getElementById('productId').value,
         }),
-
     }).then((r) => r.json());
-
 
     elements = stripe.elements({
         clientSecret
     });
     clientSecretKey = clientSecret;
-
-
     const paymentElement = elements.create("payment");
-
     paymentElement.mount("#payment-element");
-
-
-
-
 }
 
 
@@ -102,19 +84,11 @@ async function handleSubmit(e) {
     });
 
     if (error.type === "card_error" || error.type === "validation_error") {
-
         showMessage(error.message);
-
     } else {
-
         showMessage("An unexpected error occured.");
-
     }
-
-
-
     setLoading(false);
-
 }
 
 
@@ -124,13 +98,10 @@ async function placeOrder() {
     const {
         orderStatus
     } = await fetch(url, {
-
         method: "POST",
-
         headers: {
             "Content-Type": "application/json"
         },
-
         body: JSON.stringify({
             productId: document.getElementById('productId').value,
             shipName: document.querySelector("#shippingName").value,
@@ -141,7 +112,6 @@ async function placeOrder() {
             shipState: document.querySelector("#shippingState").value,
             shipPostalCode: document.querySelector("#shippingPostalCode").value,
             shipCountry: document.querySelector("#shippingCountry").value,
-
             billName: document.querySelector("#billName").value,
             billLine1: document.getElementById('billLine1').value,
             billLine2: document.getElementById('billLine2').value,
@@ -156,100 +126,27 @@ async function placeOrder() {
 }
 
 
-async function checkStatus() {
-
-    const clientSecret = new URLSearchParams(window.location.search).get(
-
-        "payment_intent_client_secret"
-
-    );
-
-
-    if (!clientSecret) {
-
-        return;
-
-    }
-
-
-    const {
-        paymentIntent
-    } = await stripe.retrievePaymentIntent(clientSecret);
-
-
-    switch (paymentIntent.status) {
-
-        case "succeeded":
-
-            showMessage("Payment succeeded!");
-
-            break;
-
-        case "processing":
-
-            showMessage("Your payment is processing.");
-
-            break;
-
-        case "requires_payment_method":
-
-            showMessage("Your payment was not successful, please try again.");
-
-            break;
-
-        default:
-
-            showMessage("Something went wrong.");
-
-            break;
-
-    }
-
-}
-
-
-
-
 
 function showMessage(messageText) {
-
-
     const messageContainer = document.querySelector("#payment-message");
-
-
     messageContainer.classList.remove("hidden");
-
     messageContainer.textContent = messageText;
-
-
     setTimeout(function () {
-
         messageContainer.classList.add("hidden");
-
         messageText.textContent = "";
-
     }, 6000);
 
 }
 
 function setLoading(isLoading) {
-
     if (isLoading) {
-
         document.querySelector("#submit").disabled = true;
-
         document.querySelector("#spinner").classList.remove("hidden");
-
         document.querySelector("#button-text").classList.add("hidden");
 
     } else {
-
         document.querySelector("#submit").disabled = false;
-
         document.querySelector("#spinner").classList.add("hidden");
-
         document.querySelector("#button-text").classList.remove("hidden");
-
     }
-
 }
