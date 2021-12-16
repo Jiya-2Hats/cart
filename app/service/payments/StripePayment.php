@@ -1,19 +1,18 @@
 <?php
 
+require_once __DIR__ . '/Payment.php';
 
+use Payment\Payment\Payment;
 
-use Core\BaseController\BaseController;
-
-class StripePayment
+class StripePayment implements Payment
 {
     private $product_amount = 0;
     public function __construct()
     {
-        \Stripe\Stripe::setApiKey(STRIPE_API_KEY);
-        header('Content-Type: application/json');
+        \Stripe\Stripe::setApiKey(PAYMENT_API_KEY);
     }
 
-    public function index($amount)
+    public function createPaymentIntent($amount)
     {
         try {
 
@@ -32,10 +31,27 @@ class StripePayment
         }
     }
 
-    public function createIntent()
+    public function getStatus()
     {
-    }
-    public function statusUpdate()
-    {
+        $status = [
+            "paymentStatus" => false,
+            "orderStatus" => ORDER_FAILURE_STATUS,
+            "orderStatusMessage" => ORDER_FAILURE_MESSAGE
+        ];
+        try {
+            if (isset($_GET['redirect_status'])) {
+                if ($_GET['redirect_status'] == 'succeeded') {
+                    $status = [
+                        "paymentStatus" => true,
+                        "orderStatus" => ORDER_SUCCESS_STATUS,
+                        "orderStatusMessage" => ORDER_SUCCESS_MESSAGE,
+                        "orderClientSecret" => $_GET['payment_intent_client_secret']
+                    ];
+                }
+            }
+            return $status;
+        } catch (Error $e) {
+            return $status;
+        }
     }
 }

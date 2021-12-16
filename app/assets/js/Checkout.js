@@ -60,7 +60,7 @@ async function handleSubmit(e) {
 
     placeOrder();
 
-    let url = baseUrl + '/checkout/updateOrderOnCheckoutSuccess';
+    let url = baseUrl + '/checkout/successPaymentURL';
     const {
         error
     } = await stripe.confirmPayment({
@@ -120,7 +120,7 @@ async function handleSubmit(e) {
 
 
 async function placeOrder() {
-    let url = baseUrl + '/StripePayment/productOrder';
+    let url = baseUrl + '/checkout/productOrder';
     const {
         orderStatus
     } = await fetch(url, {
