@@ -7,6 +7,7 @@
             "core/BaseController.php",
             "core/BaseModel.php",
             "app/config/Config.php",
+            "app/service/payments/Payment.php",
             "app/core/SessionControl.php"]
     }
 

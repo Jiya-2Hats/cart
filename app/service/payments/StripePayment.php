@@ -1,7 +1,5 @@
 <?php
 
-require_once __DIR__ . '/Payment.php';
-
 use Payment\Payment\Payment;
 
 class StripePayment implements Payment
