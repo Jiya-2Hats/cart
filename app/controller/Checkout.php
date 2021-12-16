@@ -13,9 +13,9 @@ class Checkout extends BaseController
         if (!SessionControl::checkSession()) {
             $this->redirectUrl("login");
         }
-        $this->paymentService = $this->service('payments/' . PAYMENT_GATEWAY . 'Payment');
         $this->productModel = $this->model('Product');
         $this->orderModel = $this->model('Order');
+        $this->paymentService = $this->service('payments/' . PAYMENT_GATEWAY . 'Payment');
     }
 
     public function index()
@@ -23,11 +23,13 @@ class Checkout extends BaseController
         if (!empty($_POST['productId'])) {
             $productId = $_POST['productId'];
             $productData = $this->productModel->select($productId);
+
             $data = [
                 "css" => ['style.css', 'checkout.css'],
                 'js' => ['Config.js']
             ];
             $this->view('Header', $data);
+
             $data = ['productData' => $productData];
             $this->view('Checkout', $data);
             unset($data);
