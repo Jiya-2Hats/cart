@@ -42,7 +42,7 @@ class Order extends BaseModel
     public function listOrders()
     {
         try {
-            $orderUpdate = "SELECT orders.email,products.name,products.amount,CASE WHEN orders.order_status = 1 THEN 'Success' ELSE 'Failed' END  as orderStatus FROM orders left join products on orders.product_id=products.id";
+            $orderUpdate = "SELECT orders.email,products.name,products.amount,concat(orders.ship_address_line1,orders.ship_address_line2,orders.ship_city,orders.ship_state,orders.ship_country) as shipAddress,CASE WHEN orders.order_status = 1 THEN 'Success' ELSE 'Failed' END  as orderStatus FROM orders left join products on orders.product_id=products.id";
             $this->prepare($orderUpdate);
             return $this->resultSet(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {

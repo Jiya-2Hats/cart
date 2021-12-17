@@ -33,7 +33,6 @@ class Admin extends BaseController
         $data['apiKey'] = $this->googleModel->key();
         $fraudMailList = $this->fraudMailModel->list();
         $fraudMailList = array_column($fraudMailList, 'email');
-
         $data['emailList'] = implode(',', $fraudMailList);
         $this->view('admin/ChangeSettings', $data);
         $this->view('admin/AdminFooter');
@@ -53,8 +52,9 @@ class Admin extends BaseController
         $this->orderModel = $this->model("Order");
         $orderList = $this->orderModel->listOrders();
         $fraudMailList = $this->fraudMailModel->list();
+        $key = $this->googleModel->key();
         $this->orderService = $this->service('admin/OrderValidation');
-        $orderList =  $this->orderService->validate($orderList, $fraudMailList);
+        $orderList =  $this->orderService->validate($orderList, $fraudMailList, $key);
         $data = ['orderList' => $orderList];
         $this->view('admin/Orders', $data);
         $this->view('admin/AdminFooter');
@@ -85,10 +85,26 @@ class Admin extends BaseController
     public function savekey()
     {
         if ($_POST['submitKey']) {
-
             $status = $this->googleModel->insert($_POST['key']);
             $data['status'] = $status ? "Saved" : [];
             $this->changeSettings();
         }
+    }
+
+    public function viewScore()
+    {
+
+
+        $data = [];
+        $this->view('Header', $data);
+        $this->view('admin/AdminHeader');
+        $this->orderModel = $this->model("Order");
+        $orderList = $this->orderModel->listOrders();
+        $fraudMailList = $this->fraudMailModel->list();
+        $key = $this->googleModel->key();
+        $this->orderService = $this->service('admin/OrderValidation');
+        // $scoreDetails =  $this->orderService->scoreDetails($orderList, $fraudMailList, $key);
+        $this->view('admin/ScoreDetails', $data);
+        $this->view('admin/AdminFooter');
     }
 }

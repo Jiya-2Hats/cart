@@ -7,14 +7,15 @@ class OrderValidation
     {
     }
 
-    public function validate($orderList, $fraudMailList)
+    public function validate($orderList, $fraudMailList, $key)
     {
         foreach ($orderList as $key => $listItem) {
             $this->email =  $listItem['email'];
-            $orderList[$key]['score'] = $this->validateEmailStructure() + $this->validateEmailDomain() + $this->fraudEmailValidation($fraudMailList);
+            $orderList[$key]['score'] = $this->validateEmailStructure() + $this->validateEmailDomain() + $this->fraudEmailValidation($fraudMailList) + $this->validateAddress($listItem['shipAddress'], $key);
         }
         return json_decode(json_encode($orderList));
     }
+
 
 
     private function validateEmailStructure()
@@ -36,5 +37,18 @@ class OrderValidation
     {
 
         return (array_search(strtolower($this->email), ($fraudMailList[0]))) ? 25 : 0;
+    }
+
+    private function validateAddress($shipAddress, $key)
+    {
+        $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $shipAddress . '&key=' . $key;
+        $json = @file_get_contents($url);
+        $data = json_decode($json);
+        $status = $data->status;
+        if ($status == "OK") {
+            return 0;
+        } else {
+            return 25;
+        }
     }
 }

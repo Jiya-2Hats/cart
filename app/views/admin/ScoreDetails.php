@@ -11,7 +11,7 @@
                             <th>Email</th>
                             <th>Status</th>
                             <th>Attack Score</th>
-                            <th>Score Details</th>
+                            <!-- <th>Score Details</th> -->
                         </tr>
                     </thead>
                     <tbody> <?php
@@ -25,7 +25,7 @@
                                 <td><?= $orderItem->email ?></td>
                                 <td><?= $orderItem->orderStatus ?></td>
                                 <td><?= $orderItem->score ?></td>
-                                <td><a href="<?= BASE_URL ?>/admin/viewScore">View </a></td>
+                                <!-- <td><a href="<?= BASE_URL ?>/admin/viewScore">View </a></td> -->
                             </tr>
                         <?php
                             } ?>
