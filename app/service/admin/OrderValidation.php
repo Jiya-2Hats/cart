@@ -16,8 +16,6 @@ class OrderValidation
         return json_decode(json_encode($orderList));
     }
 
-
-
     private function validateEmailStructure()
     {
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL) && preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $this->email)) {
@@ -41,9 +39,11 @@ class OrderValidation
 
     private function validateAddress($shipAddress, $key)
     {
-        $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $shipAddress . '&key=' . $key;
+
+        $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . str_replace(" ", "", $shipAddress) . '&key=AIzaSyANt2BsVQ42mBlAWjO0oF1-juiQu5gjAbc';
         $json = @file_get_contents($url);
         $data = json_decode($json);
+
         $status = $data->status;
         if ($status == "OK") {
             return 0;

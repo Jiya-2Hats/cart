@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-12 pt-5">
             <div class="card p-2">
-                <table id="example" class="table table-striped" style="">
+                <table id="example" class="table table-striped">
                     <thead>
                         <tr>
                             <th>Sl.No</th>
