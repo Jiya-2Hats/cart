@@ -44,7 +44,7 @@ class Order extends BaseModel
         try {
             $orderUpdate = "SELECT orders.email,products.name,products.amount,CASE WHEN orders.order_status = 1 THEN 'Success' ELSE 'Failed' END  as orderStatus FROM orders left join products on orders.product_id=products.id";
             $this->prepare($orderUpdate);
-            return $this->resultSet(PDO::FETCH_OBJ);
+            return $this->resultSet(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             echo $e->getMessage();
         }

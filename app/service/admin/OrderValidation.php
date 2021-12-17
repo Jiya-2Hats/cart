@@ -2,30 +2,45 @@
 
 class OrderValidation
 {
+    private $email;
     public function __construct()
     {
     }
 
-    public function validate($orderList)
+    public function validate($orderList, $fraudMailList)
     {
-        // foreach ($orderList as $key => $listItem) {
-        //     $orderList->key->score  = 0 + $this->validateEmailStructure($listItem->email);
-        //     $orderList->key->score += $this->validateEmailDomain($listItem->email);
-        // }
-    }
-
-
-    private function validateEmailStructure($email)
-    {
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return 1;
+        foreach ($orderList as $key => $listItem) {
+            $this->email =  $listItem['email'];
+            $orderList[$key]['score'] = $this->validateEmailStructure() + $this->validateEmailDomain() + $this->fraudEmailValidation();
         }
-        return 0;
+        return json_decode(json_encode($orderList));
     }
 
-    private function validateEmailDomain($email)
+
+    private function validateEmailStructure()
     {
-        $domain = explode("@", $email, 2);
-        return checkdnsrr($domain[1]) ? 0 : 1;
+        if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+
+            return 0;
+        }
+        return 1;
+    }
+
+    private function validateEmailDomain()
+    {
+
+        $domain = explode("@", $this->email);
+        // if (checkdnsrr(array_pop($domain), "AAAA")) {
+        //     echo "Valid Email<br/>";
+        // } else {
+        //     echo "Invalid Email<br/>";
+        // }
+        $domain = explode("@", $this->email);
+        return checkdnsrr(array_pop($domain), "AAAA") ? 0 : 1;
+    }
+
+    private function fraudEmailValidation()
+    {
+        return 0;
     }
 }

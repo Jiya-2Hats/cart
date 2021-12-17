@@ -10,7 +10,7 @@
                             <th>Price</th>
                             <th>Email</th>
                             <th>Status</th>
-
+                            <th>Attack Score</th>
                         </tr>
                     </thead>
                     <tbody> <?php
@@ -23,6 +23,7 @@
                                 <td><?= $orderItem->amount ?></td>
                                 <td><?= $orderItem->email ?></td>
                                 <td><?= $orderItem->orderStatus ?></td>
+                                <td><?= $orderItem->score ?></td>
                             </tr>
                         <?php
                             } ?>

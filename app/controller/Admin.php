@@ -11,9 +11,21 @@ class Admin extends BaseController
 
     public function index()
     {
+        // $data = ["css" => ['style.css', 'checkout.css']];
+        // $this->view('Header', $data);
+        // $this->view('admin/AdminHeader');
+        // $this->view('admin/Home');
+        // $this->view('admin/AdminFooter');
+        // $this->view('Footer');
+        $this->orderList();
+    }
+    public function changeSettings()
+    {
         $data = ["css" => ['style.css', 'checkout.css']];
         $this->view('Header', $data);
-        $this->view('admin/Home');
+        $this->view('admin/AdminHeader');
+        $this->view('admin/ChangeSettings');
+        $this->view('admin/AdminFooter');
         $this->view('Footer');
     }
 
@@ -25,12 +37,16 @@ class Admin extends BaseController
         ];
 
         $this->view('Header', $data);
+        $this->view('admin/AdminHeader');
         $this->orderModel = $this->model("Order");
+        $this->fraudMailModel = $this->model("FraudMail");
         $orderList = $this->orderModel->listOrders();
+        $fraudMailList = $this->fraudMailModel->list();
         $this->orderService = $this->service('admin/OrderValidation');
-        $this->orderService->validate($orderList);
+        $orderList =  $this->orderService->validate($orderList, $fraudMailList);
         $data = ['orderList' => $orderList];
         $this->view('admin/Orders', $data);
+        $this->view('admin/AdminFooter');
         $this->view('Footer');
     }
 }
