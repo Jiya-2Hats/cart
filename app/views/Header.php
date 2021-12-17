@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>E-Cart</title>
     <link rel="stylesheet" href="<?= BASE_URL ?>/app/assets/css/bootstrap/bootstrap.min.css" />
     <script src="<?= BASE_URL ?>/app/assets/js/jquery/jquery.min.js"></script>
     <script src="<?= BASE_URL ?>/app/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+
     <?php
     if (isset($data['css'])) {
         foreach ($data['css'] as $cssFile) : ?>

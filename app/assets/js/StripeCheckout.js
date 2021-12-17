@@ -133,6 +133,7 @@ async function placeOrder() {
 
         body: JSON.stringify({
             productId: document.getElementById('productId').value,
+            email: document.querySelector("#email").value,
             shipName: document.querySelector("#shippingName").value,
             shipPhone: document.querySelector("#shipPhone").value,
             shipLine1: document.querySelector("#shippingLine1").value,
