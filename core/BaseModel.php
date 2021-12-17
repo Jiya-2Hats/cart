@@ -68,13 +68,9 @@ class BaseModel
 
     public function single()
     {
-        try {
-            $this->execute();
-            return $this->statement->fetch(PDO::FETCH_OBJ);
-        } catch (PDOException $e) {
-            $this->error = $e->getMessage();
-            echo $this->error;
-        }
+
+        $this->execute();
+        return $this->statement->fetch(PDO::FETCH_OBJ);
     }
 
 
