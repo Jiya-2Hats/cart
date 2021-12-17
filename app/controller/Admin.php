@@ -19,10 +19,16 @@ class Admin extends BaseController
 
     public function orderList()
     {
-        $data = ["css" => ['style.css', 'checkout.css']];
+        $data = [
+            "css" => ['bootstrap/twitter/bootstrap.min.css', 'bootstrap/datatables/dataTables.bootstrap5.min.css'],
+            "js" => ['datatables/jquery-3.5.1.js', 'datatables/jquery.dataTables.min.js', 'datatables/dataTables.bootstrap5.min.js', 'datatables/orders.js']
+        ];
+
         $this->view('Header', $data);
         $this->orderModel = $this->model("Order");
         $orderList = $this->orderModel->listOrders();
+        $this->orderService = $this->service('admin/OrderValidation');
+        $this->orderService->validate($orderList);
         $data = ['orderList' => $orderList];
         $this->view('admin/Orders', $data);
         $this->view('Footer');
