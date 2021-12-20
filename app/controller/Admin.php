@@ -69,7 +69,6 @@ class Admin extends BaseController
     {
         if ($_POST['submitList']) {
             $emailList = $this->getEmailListArray($_POST['emailList']);
-
             $status = $this->fraudMailModel->insert($emailList);
             $this->status = $status ? "Email List Saved" : [];
             $this->changeSettings();
