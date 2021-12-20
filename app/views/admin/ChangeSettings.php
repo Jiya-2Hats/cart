@@ -5,9 +5,9 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <form action="<?= BASE_URL ?>/admin/saveMailList" method="POST">
-                            <div class="col-sm-12 py-3">
+                            <div class="col-sm-12 py-3 mh-7em">
                                 <h2>Fraud Email List</h2>
-                                <span class="text-success text-small py-2"><?= (!empty($data['status'])) ?  $data['status'] : ""; ?></span>
+                                <div class="mh-12"><span class="text-success text-small py-2 "><?= (!empty($data['status'])) ?  $data['status'] : ""; ?></span></div>
                             </div>
                             <div class="col-sm-12 mt-2">
                                 <label for="emailList">Email List</label>
@@ -21,9 +21,9 @@
                     </div>
                     <div class="col-sm-6">
                         <form action="<?= BASE_URL ?>/admin/savekey" class="col-sm-12" method="POST">
-                            <div class="col-sm-12 py-3">
+                            <div class="col-sm-12 py-3 mh-7em">
                                 <h2>Google Api key</h2>
-                                <span class="text-success text-small"><?= (!empty($data['apiStatus'])) ?  $data['apiStatus'] : ""; ?></span>
+                                <div class="mh-12"><span class="text-success text-small  "><?= (!empty($data['apiStatus'])) ?  $data['apiStatus'] : ""; ?></span></div>
                             </div>
                             <div class="col-sm-12 mt-2 ">
                                 <label for="key"> Key</label>

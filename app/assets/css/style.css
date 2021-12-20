@@ -294,3 +294,7 @@ button:disabled {
 .border-grey {
     border: 1px solid rgba(128, 128, 128, 0.479);
 }
+
+.mh-7em{
+    min-height: 7em ;
+}
