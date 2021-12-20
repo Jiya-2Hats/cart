@@ -37,12 +37,12 @@ class OrderValidation implements Email
     public function validateEmailDomain()
     {
         $domain = explode("@", $this->email);
-        return checkdnsrr(array_pop($domain), "MX") ? 0 : 25;
+        $domain = array_pop($domain);
+        return checkdnsrr(trim($domain), "MX") ? 0 : 25;
     }
 
     public function fraudEmailValidation($fraudMailList)
     {
-
         return (array_search(strtolower($this->email), ($fraudMailList[0]))) ? 25 : 0;
     }
 

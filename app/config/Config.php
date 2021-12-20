@@ -16,7 +16,7 @@ define('GUEST_NAME', 'Guest');
 
 // Database configuration
 define('DB_HOSTNAME', 'localhost');
-define('DB_USER', 'root');
+define('DB_USER', 'cart_user');
 define('DB_PASSWORD', 'admin');
 define('DB_NAME', 'cart');
 

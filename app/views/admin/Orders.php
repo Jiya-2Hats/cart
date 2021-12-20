@@ -44,7 +44,7 @@
                                                         </div>
 
                                                         <div class="row text-center pt-2">
-                                                            <span><?= $violationItem ?></span>
+                                                            <span><?= $violationItem ?>%</span>
                                                         </div>
 
 
