@@ -7,6 +7,8 @@ class Admin extends BaseController
     private $orderModel;
     private $fraudMailModel;
     private $googleModel;
+    private $status = "";
+    private $apiStatus = "";
     public function __construct()
     {
 
@@ -34,6 +36,8 @@ class Admin extends BaseController
         $fraudMailList = $this->fraudMailModel->list();
         $fraudMailList = array_column($fraudMailList, 'email');
         $data['emailList'] = implode(',', $fraudMailList);
+        $data['status'] = $this->status;
+        $data['apiStatus'] = $this->apiStatus;
         $this->view('admin/ChangeSettings', $data);
         $this->view('admin/AdminFooter');
         $this->view('Footer');
@@ -67,12 +71,13 @@ class Admin extends BaseController
             $emailList = $this->getEmailListArray($_POST['emailList']);
 
             $status = $this->fraudMailModel->insert($emailList);
-            $data['status'] = $status ? "List Saved" : [];
+            $this->status = $status ? "Email List Saved" : [];
             $this->changeSettings();
         }
     }
     private function getEmailListArray($emailList)
     {
+        $emailList = rtrim($emailList, ',');
         $emailList = explode(',', $emailList);
         foreach ($emailList as $key => $listItem) {
             if (!filter_var($listItem, FILTER_VALIDATE_EMAIL)) {
@@ -86,7 +91,7 @@ class Admin extends BaseController
     {
         if ($_POST['submitKey']) {
             $status = $this->googleModel->insert($_POST['key']);
-            $data['status'] = $status ? "Saved" : [];
+            $this->apiStatus = $status ? "Api Key Updated" : [];
             $this->changeSettings();
         }
     }
