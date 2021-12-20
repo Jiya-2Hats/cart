@@ -11,7 +11,6 @@
                             <th class="col-sm-3">Email</th>
                             <th class="col-sm-2">Status</th>
                             <th class="col-sm-2">Attack Score</th>
-                            <!-- <th class="col-sm-1">Score Details</th> -->
                         </tr>
                     </thead>
                     <tbody> <?php
@@ -25,7 +24,7 @@
                                 <td><?= $orderItem->email ?></td>
                                 <td><?= $orderItem->orderStatus ?></td>
                                 <td><?= $orderItem->score ?><a class="decoration-none" data-bs-toggle="collapse" data-bs-target="#collapseExample<?= $i ?>" aria-expanded="false" aria-controls="collapseExample<?= $i ?>">View </a></td>
-                                <!-- <td></td> -->
+
                             </tr>
                             <tr>
                                 <td colspan="7">
