@@ -8,7 +8,7 @@
                     <div class="container-fluid">
                         <h1>Cart</h1>
                         <div class=" col-sm-2 text-right">
-                            <a href="<?= BASE_URL ?>/admin/orderlist" class="px-2">Orders </a>
+                            <a href="<?= BASE_URL ?>/admin/" class="px-2">Orders </a>
                             <a href="<?= BASE_URL ?>/admin/changesettings" class="px-2">Settings</a>
 
                         </div>
