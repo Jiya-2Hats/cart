@@ -22,8 +22,15 @@ class ProductOrder extends BaseController
             $getRequest = file_get_contents('php://input');
             $getData = json_decode($getRequest);
             $getData->orderStatus = ORDER_FAILURE_STATUS;
-
-            $placeOrder = $this->orderModel->orderPlaced($getData);
+            $this->fraudMailModel = $this->model("FraudMail");
+            $fraudMailList = $this->fraudMailModel->list();
+            $this->googleModel = $this->model("Google");
+            $key = $this->googleModel->key();
+            $this->orderService = $this->service('admin/OrderValidation');
+            $address = $getData->shipLine1 . $getData->shipLine2 . $getData->shipCity . $getData->shipState . $getData->shipCountry . $getData->shipPostalCode;
+            $validateData = ['address' => $address, 'email' => $getData->email];
+            $violationList =  $this->orderService->validateEmailAndAddresss($validateData, $fraudMailList, $key);
+            $placeOrder = $this->orderModel->orderPlaced($getData, $violationList);
             if ($placeOrder == true) {
                 $output = ['status' => ORDER_SUCCESS_MESSAGE];
             } else {

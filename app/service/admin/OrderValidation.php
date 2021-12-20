@@ -46,10 +46,10 @@ class OrderValidation implements Email
         return (array_search(strtolower($this->email), ($fraudMailList[0]))) ? 25 : 0;
     }
 
-    public function validateAddress($shipAddress, $key)
+    public function validateAddress($address, $key)
     {
 
-        $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . str_replace(" ", "", $shipAddress) . '&key=AIzaSyANt2BsVQ42mBlAWjO0oF1-juiQu5gjAbc';
+        $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . str_replace(" ", "", $address) . '&key=AIzaSyANt2BsVQ42mBlAWjO0oF1-juiQu5gjAbc';
         $json = @file_get_contents($url);
         $data = json_decode($json);
 
@@ -59,5 +59,15 @@ class OrderValidation implements Email
         } else {
             return 25;
         }
+    }
+
+    public function validateEmailAndAddresss($validateData, $fraudMailList, $key)
+    {
+        $this->email = $validateData['email'];
+        $violation['emailStructure'] = $this->validateEmailStructure();
+        $violation['emailDomain']  =   $this->validateEmailDomain();
+        $violation['fraudEmail']  =  $this->fraudEmailValidation($fraudMailList);
+        $violation['invalidAddress'] = $this->validateAddress($validateData['address'], $key);
+        return $violation;
     }
 }

@@ -18,13 +18,6 @@ class Admin extends BaseController
 
     public function index()
     {
-        // $data = ["css" => ['style.css', 'checkout.css']];
-        // $this->view('Header', $data);
-        // $this->view('admin/AdminHeader');
-        // $this->view('admin/Home');
-        // $this->view('admin/AdminFooter');
-        // $this->view('Footer');
-
         $this->orderList();
     }
     public function changeSettings()
@@ -46,7 +39,7 @@ class Admin extends BaseController
     public function orderList()
     {
         $data = [
-            "css" => ['bootstrap/twitter/bootstrap.min.css', 'bootstrap/datatables/dataTables.bootstrap5.min.css', 'style.css'],
+            "css" => ['bootstrap/twitter/bootstrap.min.css', 'bootstrap/dataTables.bootstrap5.min.css', 'style.css'],
             "js" => ['datatables/jquery-3.5.1.js', 'datatables/jquery.dataTables.min.js', 'datatables/dataTables.bootstrap5.min.js', 'datatables/orders.js']
         ];
 
@@ -54,11 +47,11 @@ class Admin extends BaseController
         $this->view('admin/AdminHeader');
 
         $this->orderModel = $this->model("Order");
-        $orderList = $this->orderModel->listOrders();
-        $fraudMailList = $this->fraudMailModel->list();
-        $key = $this->googleModel->key();
-        $this->orderService = $this->service('admin/OrderValidation');
-        $orderList =  $this->orderService->validate($orderList, $fraudMailList, $key);
+        $orderList = $this->orderModel->listWithViolation();
+        // $fraudMailList = $this->fraudMailModel->list();
+        // $key = $this->googleModel->key();
+        // $this->orderService = $this->service('admin/OrderValidation');
+        // $orderList =  $this->orderService->validate($orderList, $fraudMailList, $key);
         $data = ['orderList' => $orderList];
         $this->view('admin/Orders', $data);
         $this->view('admin/AdminFooter');
