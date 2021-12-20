@@ -8,6 +8,7 @@
             "core/BaseModel.php",
             "app/config/Config.php",
             "app/service/payments/Payment.php",
+            "app/service/admin/Email.php",
             "app/core/SessionControl.php"]
     }
 

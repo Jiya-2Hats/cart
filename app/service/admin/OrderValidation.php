@@ -1,6 +1,6 @@
 <?php
 
-class OrderValidation
+class OrderValidation implements Email
 {
     private $email;
     public function __construct()
@@ -25,7 +25,7 @@ class OrderValidation
         return json_decode(json_encode($orderList));
     }
 
-    private function validateEmailStructure()
+    public function validateEmailStructure()
     {
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL) && preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $this->email)) {
 
@@ -34,19 +34,19 @@ class OrderValidation
         return 25;
     }
 
-    private function validateEmailDomain()
+    public function validateEmailDomain()
     {
         $domain = explode("@", $this->email);
-        return checkdnsrr(array_pop($domain), "AAAA") ? 0 : 25;
+        return checkdnsrr(array_pop($domain), "MX") ? 0 : 25;
     }
 
-    private function fraudEmailValidation($fraudMailList)
+    public function fraudEmailValidation($fraudMailList)
     {
 
         return (array_search(strtolower($this->email), ($fraudMailList[0]))) ? 25 : 0;
     }
 
-    private function validateAddress($shipAddress, $key)
+    public function validateAddress($shipAddress, $key)
     {
 
         $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . str_replace(" ", "", $shipAddress) . '&key=AIzaSyANt2BsVQ42mBlAWjO0oF1-juiQu5gjAbc';
