@@ -42,7 +42,7 @@ class Admin extends BaseController
     public function orderList()
     {
         $data = [
-            "css" => ['bootstrap/twitter/bootstrap.min.css', 'bootstrap/datatables/dataTables.bootstrap5.min.css'],
+            "css" => ['bootstrap/twitter/bootstrap.min.css', 'bootstrap/datatables/dataTables.bootstrap5.min.css', 'style.css'],
             "js" => ['datatables/jquery-3.5.1.js', 'datatables/jquery.dataTables.min.js', 'datatables/dataTables.bootstrap5.min.js', 'datatables/orders.js']
         ];
 
@@ -89,22 +89,5 @@ class Admin extends BaseController
             $data['status'] = $status ? "Saved" : [];
             $this->changeSettings();
         }
-    }
-
-    public function viewScore()
-    {
-
-
-        $data = [];
-        $this->view('Header', $data);
-        $this->view('admin/AdminHeader');
-        $this->orderModel = $this->model("Order");
-        $orderList = $this->orderModel->listOrders();
-        $fraudMailList = $this->fraudMailModel->list();
-        $key = $this->googleModel->key();
-        $this->orderService = $this->service('admin/OrderValidation');
-        // $scoreDetails =  $this->orderService->scoreDetails($orderList, $fraudMailList, $key);
-        $this->view('admin/ScoreDetails', $data);
-        $this->view('admin/AdminFooter');
     }
 }

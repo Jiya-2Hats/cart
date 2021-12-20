@@ -11,7 +11,16 @@ class OrderValidation
     {
         foreach ($orderList as $key => $listItem) {
             $this->email =  $listItem['email'];
-            $orderList[$key]['score'] = $this->validateEmailStructure() + $this->validateEmailDomain() + $this->fraudEmailValidation($fraudMailList) + $this->validateAddress($listItem['shipAddress'], $key);
+            $violation['emailStructure'] = $this->validateEmailStructure();
+            $violation['emailDomain']  =   $this->validateEmailDomain();
+            $violation['fraudEmail']  =  $this->fraudEmailValidation($fraudMailList);
+            $violation['invalidAddress'] = $this->validateAddress($listItem['shipAddress'], $key);
+
+            $orderList[$key]['score'] = 0;
+            foreach ($violation as $item) {
+                $orderList[$key]['score'] += $item;
+            }
+            $orderList[$key]['violation'] = $violation;
         }
         return json_decode(json_encode($orderList));
     }

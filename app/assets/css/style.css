@@ -281,3 +281,7 @@ button:disabled {
     float: right;
     text-align: right;
 }
+
+.decoration-none {
+    text-decoration: none;
+}
