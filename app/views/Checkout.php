@@ -101,7 +101,7 @@
                                             </div>
                                             <div class="col-sm-6 ">
                                                 <label for="shippingPostalCode">Postal Code </label>
-                                                <input type="text" inputmode="numeric" name="shippingPostalCode" placeholder="Postal Code" id="shippingPostalCode" class="inputfield py-2 px-2 Input col-sm-12" required>
+                                                <input type="text" name="shippingPostalCode" placeholder="Postal Code" id="shippingPostalCode" class="inputfield py-2 px-2 Input col-sm-12" required>
                                             </div>
                                         </div>
 
