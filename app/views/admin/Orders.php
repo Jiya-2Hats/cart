@@ -9,9 +9,9 @@
                             <th class="col-sm-2">Name</th>
                             <th class="col-sm-1">Price</th>
                             <th class="col-sm-2">Email</th>
-                            <th class="col-sm-4">Shipping Address</th>
+                            <th class="col-sm-6">Shipping Address</th>
                             <th class="col-sm-1">Status</th>
-                            <th class="col-sm-3">Violation</th>
+                            <th class="col-sm-1">Violation</th>
                         </tr>
                     </thead>
                     <tbody> <?php
