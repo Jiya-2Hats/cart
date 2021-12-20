@@ -285,3 +285,12 @@ button:disabled {
 .decoration-none {
     text-decoration: none;
 }
+
+
+.p-12 {
+    padding: 0 12px;
+}
+
+.border-grey {
+    border: 1px solid rgba(128, 128, 128, 0.479);
+}
