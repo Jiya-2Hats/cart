@@ -1,8 +1,10 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 pt-5">
+            <div class="mh-12 text-center py-2"><span class="text-success text-small py-2 "><?= (!empty($data['status'])) ?  $data['status'] : ""; ?></span></div>
+
             <div class="card p-2">
-                <table id="example" class="table table-striped" style="">
+                <table id="example" class="table table-striped">
                     <thead>
                         <tr>
                             <th class="col-sm-1">Sl.No</th>
@@ -89,8 +91,9 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="" method="POST">
+                                <form action="<?= BASE_URL ?>/admin/updateOrder" method="POST">
                                     <div class="col-sm-12 mb-2">
+                                        <input type="hidden" name="orderId" id="orderId">
                                         <label for="email">Email </label>
                                         <input type="email" name="email" id="email" class="inputfield py-2 px-2 Input col-sm-12" required>
                                     </div>

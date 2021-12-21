@@ -43,4 +43,11 @@ class ProductOrder extends BaseController
             echo json_encode($exception->getMessage());
         }
     }
+
+    public function update()
+    {
+        if (isset($_POST)) {
+            var_dump($_POST);
+        }
+    }
 }

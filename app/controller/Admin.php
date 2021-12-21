@@ -40,7 +40,7 @@ class Admin extends BaseController
     {
         $data = [
             "css" => ['bootstrap/twitter/bootstrap.min.css', 'bootstrap/dataTables.bootstrap5.min.css', 'style.css'],
-            "js" => ['datatables/jquery-3.5.1.js', 'datatables/jquery.dataTables.min.js', 'datatables/dataTables.bootstrap5.min.js', 'datatables/orders.js']
+            "js" => ['datatables/jquery-3.5.1.js', 'datatables/jquery.dataTables.min.js', 'datatables/dataTables.bootstrap5.min.js', 'datatables/orders.js', 'Admin.js']
         ];
 
         $this->view('Header', $data);
@@ -48,11 +48,7 @@ class Admin extends BaseController
 
         $this->orderModel = $this->model("Order");
         $orderList = $this->orderModel->listWithViolation();
-        // $fraudMailList = $this->fraudMailModel->list();
-        // $key = $this->googleModel->key();
-        // $this->orderService = $this->service('admin/OrderValidation');
-        // $orderList =  $this->orderService->validate($orderList, $fraudMailList, $key);
-        $data = ['orderList' => $orderList];
+        $data = ['orderList' => $orderList, 'status' => $this->status];
         $this->view('admin/Orders', $data);
         $this->view('admin/AdminFooter');
         $this->view('Footer');
@@ -85,6 +81,44 @@ class Admin extends BaseController
             $status = $this->googleModel->insert($_POST['key']);
             $this->apiStatus = $status ? "Api Key Updated" : [];
             $this->changeSettings();
+        }
+    }
+
+    public function updateOrder()
+    {
+        if (isset($_POST)) {
+            $updateOrderData = [
+                'id' => $_POST['orderId'],
+                'email' => $_POST['email'],
+                'shipLine1' => $_POST['shippingLine1'],
+                'shipLine2' => $_POST['shippingLine2'],
+                'shipCity' => $_POST['shippingCity'],
+                'shipState' => $_POST['shippingState'],
+                'shipCountry' => $_POST['shippingCountry'],
+                'shipPostalCode' => $_POST['shippingPostalCode'],
+            ];
+            $this->orderModel = $this->model('Order');
+            $updateStatus = $this->orderModel->updateOrderById($updateOrderData);
+            $this->status = $updateStatus ? "Order Updated" : "";
+            if ($updateStatus) {
+            }
+            $this->orderList();
+        }
+    }
+
+    public function editOrder()
+    {
+        try {
+            $getRequest = file_get_contents('php://input');
+            $getData = json_decode($getRequest);
+
+
+            $this->orderModel = $this->model('Order');
+            $orderData = $this->orderModel->getOrderById($getData->id);
+            echo json_encode($orderData);
+        } catch (Exception $exception) {
+            http_response_code(500);
+            echo json_encode($exception->getMessage());
         }
     }
 }

@@ -62,4 +62,27 @@ class Order extends BaseModel
             echo $e->getMessage();
         }
     }
+
+    public function getOrderById($id)
+    {
+        try {
+            $orderUpdate = "SELECT orders.id,orders.email,orders.ship_address_line1 as shipAddressLine1,orders.ship_address_line2 as shipAddressLine2,orders.ship_city as shipCity,orders.ship_state as shipState,orders.ship_country as shipCountry,orders.ship_postal_code as shipPostalCode FROM orders where id=:id";
+            $this->prepare($orderUpdate);
+            $this->bindParameter(':id', $id);
+            return $this->resultSet(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+    public function updateOrderById($updateData)
+    {
+        try {
+            $orderUpdate = "UPDATE  orders set email=:email,ship_address_line1=:shipLine1,ship_address_line2=:shipLine2,ship_city=:shipCity,ship_state=:shipState,ship_country =:shipCountry,ship_postal_code=:shipPostalCode where id=:id";
+            $this->prepare($orderUpdate);
+            $this->bindPDOParameter($updateData);
+            return $this->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }
