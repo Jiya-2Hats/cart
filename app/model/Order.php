@@ -74,12 +74,13 @@ class Order extends BaseModel
             echo $e->getMessage();
         }
     }
-    public function updateOrderById($updateData)
+    public function updateOrderById($updateData, $violationList)
     {
         try {
-            $orderUpdate = "UPDATE  orders set email=:email,ship_address_line1=:shipLine1,ship_address_line2=:shipLine2,ship_city=:shipCity,ship_state=:shipState,ship_country =:shipCountry,ship_postal_code=:shipPostalCode where id=:id";
+            $orderUpdate = "UPDATE  orders set email=:email,ship_address_line1=:shipLine1,ship_address_line2=:shipLine2,ship_city=:shipCity,ship_state=:shipState,ship_country =:shipCountry,ship_postal_code=:shipPostalCode,email_structure_violation=:emailStructure,email_domain_violation=:emailDomain,email_fraud_violation=:fraudEmail,address_violation=:invalidAddress where id=:id";
             $this->prepare($orderUpdate);
             $this->bindPDOParameter($updateData);
+            $this->bindPDOParameter($violationList);
             return $this->execute();
         } catch (PDOException $e) {
             echo $e->getMessage();

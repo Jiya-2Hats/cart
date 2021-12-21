@@ -97,12 +97,22 @@ class Admin extends BaseController
                 'shipCountry' => $_POST['shippingCountry'],
                 'shipPostalCode' => $_POST['shippingPostalCode'],
             ];
+
+
+
+            $this->fraudMailModel = $this->model("FraudMail");
+            $fraudMailList = $this->fraudMailModel->list();
+            $this->googleModel = $this->model("Google");
+            $key = $this->googleModel->key();
+            $this->orderService = $this->service('admin/OrderValidation');
+            $address = $updateOrderData['shipLine1'] . $updateOrderData['shipLine2'] . $updateOrderData['shipCity'] . $updateOrderData['shipState'] . $updateOrderData['shipCountry'] . $updateOrderData['shipPostalCode'];
+            $validateData = ['address' => str_replace(" ", "", $address), 'email' => $updateOrderData['email']];
+            $violationList =  $this->orderService->validateEmailAndAddresss($validateData, $fraudMailList, $key);
             $this->orderModel = $this->model('Order');
-            $updateStatus = $this->orderModel->updateOrderById($updateOrderData);
+            $updateStatus = $this->orderModel->updateOrderById($updateOrderData, $violationList);
             $this->status = $updateStatus ? "Order Updated" : "";
-            if ($updateStatus) {
-            }
-            $this->orderList();
+
+            $this->redirectUrl('admin');
         }
     }
 
@@ -111,8 +121,6 @@ class Admin extends BaseController
         try {
             $getRequest = file_get_contents('php://input');
             $getData = json_decode($getRequest);
-
-
             $this->orderModel = $this->model('Order');
             $orderData = $this->orderModel->getOrderById($getData->id);
             echo json_encode($orderData);
