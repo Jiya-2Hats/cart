@@ -12,7 +12,7 @@
                             <div class="col-sm-12 mt-2">
                                 <label for="emailList">Email List</label>
                                 <div class="col-sm-12 my-2 ">
-                                    <textarea type="text" name="emailList" id="emailList" rows="1" class="col-sm-12 p-2 inputfield"><?= $data['emailList'] ?></textarea>
+                                    <textarea type="text" name="emailList" id="emailList" rows="2" class="col-sm-12 p-2 inputfield"><?= $data['emailList'] ?></textarea>
                                 </div>
                             </div>
                             <input type="submit" name="submitList" id="submitList" class="btn btn-primary" value="Submit">
@@ -20,7 +20,7 @@
 
                     </div>
                     <div class="col-sm-6">
-                        <form action="<?= BASE_URL ?>/admin/savekey" class="col-sm-12" method="POST">
+                        <form action="<?= BASE_URL ?>/admin/savekey" class="col-sm-12 mh-22em" method="POST">
                             <div class="col-sm-12 py-3 mh-7em">
                                 <h2>Google Api key</h2>
                                 <div class="mh-12"><span class="text-success text-small  "><?= (!empty($data['apiStatus'])) ?  $data['apiStatus'] : ""; ?></span></div>
