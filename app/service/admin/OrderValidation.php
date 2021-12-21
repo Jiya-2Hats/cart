@@ -49,7 +49,7 @@ class OrderValidation implements Email
     public function validateAddress($address, $key)
     {
 
-        $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . str_replace(" ", "", $address) . '&key=AIzaSyANt2BsVQ42mBlAWjO0oF1-juiQu5gjAbc';
+        $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . str_replace(" ", "", $address) . '&key=' . $key->apiKey;
         $json = @file_get_contents($url);
         $data = json_decode($json);
 
