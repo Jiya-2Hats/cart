@@ -27,7 +27,7 @@ class ProductOrder extends BaseController
             $this->googleModel = $this->model("Google");
             $key = $this->googleModel->key();
             $this->orderService = $this->service('admin/OrderValidation');
-            $address = $getData->shipLine1 . $getData->shipLine2 . $getData->shipCity . $getData->shipState . $getData->shipCountry . $getData->shipPostalCode;
+            $address = trim($getData->shipLine1) . " " . trim($getData->shipLine2) . ", " . trim($getData->shipCity) . ", " . trim($getData->shipPostalCode) . ", " . trim($getData->shipCountry);
             $validateData = ['address' => $address, 'email' => $getData->email];
             $violationList =  $this->orderService->validateEmailAndAddresss($validateData, $fraudMailList, $key);
             $placeOrder = $this->orderModel->orderPlaced($getData, $violationList);
@@ -41,13 +41,6 @@ class ProductOrder extends BaseController
         } catch (Exception $exception) {
             http_response_code(500);
             echo json_encode($exception->getMessage());
-        }
-    }
-
-    public function update()
-    {
-        if (isset($_POST)) {
-            var_dump($_POST);
         }
     }
 }

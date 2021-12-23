@@ -24,7 +24,7 @@ $(document).ready(function (e) {
                 $('#shippingLine1').val(result['shipAddressLine1']);
                 $('#shippingLine2').val(result['shipAddressLine2']);
                 $('#shippingCity').val(result['shipCity']);
-                $('#shippingState').val(result['shipState']);
+                // $('#shippingState').val(result['shipState']);
                 $('#shippingCountry').val(result['shipCountry']);
                 $('#shippingPostalCode').val(result['shipPostalCode']);
 

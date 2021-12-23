@@ -79,7 +79,7 @@ async function handleSubmit(e) {
                         line1: document.getElementById('billLine1').value,
                         line2: document.getElementById('billLine2').value,
                         postal_code: document.getElementById('billPostalCode').value,
-                        state: document.getElementById('billState').value,
+                        // state: document.getElementById('billState').value,
                     },
                 },
 
@@ -92,7 +92,6 @@ async function handleSubmit(e) {
                     line2: document.querySelector("#shippingLine2").value,
                     city: document.querySelector("#shippingCity").value,
                     postal_code: parseInt(document.querySelector("#shippingPostalCode")),
-                    state: document.querySelector("#shippingState").value,
                     country: document.querySelector("#shippingCountry").value,
                 },
             },
@@ -139,7 +138,7 @@ async function placeOrder() {
             shipLine1: document.querySelector("#shippingLine1").value,
             shipLine2: document.querySelector("#shippingLine2").value,
             shipCity: document.querySelector("#shippingCity").value,
-            shipState: document.querySelector("#shippingState").value,
+            // shipState: document.querySelector("#shippingState").value,
             shipPostalCode: document.querySelector("#shippingPostalCode").value,
             shipCountry: document.querySelector("#shippingCountry").value,
 
@@ -148,7 +147,7 @@ async function placeOrder() {
             billLine2: document.getElementById('billLine2').value,
             billCity: document.getElementById('billCity').value,
             billPostalCode: document.getElementById('billPostalCode').value,
-            billState: document.getElementById('billState').value,
+            // billState: document.getElementById('billState').value,
             billCountry: document.getElementById('billCountry').value,
             clientSecretKey: clientSecretKey
         }),

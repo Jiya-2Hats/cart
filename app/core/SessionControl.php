@@ -3,7 +3,6 @@ session_start();
 
 class SessionControl
 {
-
     public static function checkSession()
     {
         return isset($_SESSION['sessionFlag']) ? true : false;

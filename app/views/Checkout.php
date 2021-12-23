@@ -25,12 +25,12 @@
                                 </div>
 
                                 <div class="col-sm-12 mb-2 ">
-                                    <label for="billLine1">Billing Address </label>
+                                    <label for="billLine1">Address Line 1 </label>
                                     <input type="text" name="billLine1" id="billLine1" placeholder="Address" class="inputfield py-2 px-2 Input col-sm-12" required value="<?= (isset($_SESSION['address_line1']) ? $_SESSION['address_line1'] : "") ?>">
                                 </div>
 
                                 <div class="col-sm-12 mb-2 ">
-                                    <label for="billLine2">Landmark </label>
+                                    <label for="billLine2">Address Line 2 </label>
                                     <input type="text" name="billLine2" id="billLine2" placeholder="Landmark" class="inputfield py-2  px-2 Input col-sm-12" required value="<?= (isset($_SESSION['address_line2']) ? $_SESSION['address_line2'] : "") ?>">
                                 </div>
 
@@ -43,16 +43,11 @@
                                         </div>
                                         <div class="col-sm-6 ">
                                             <label for="billPostalCode">Postal Code </label>
-                                            <input type="text" inputmode="numeric" name="billPostalCode" placeholder="Postal Code" id="billPostalCode" class="inputfield py-2 px-2 Input col-sm-12" required value="<?= (isset($_SESSION['postal_code']) ? $_SESSION['postal_code'] : "") ?>">
+                                            <input type="text" name="billPostalCode" placeholder="Postal Code" id="billPostalCode" class="inputfield py-2 px-2 Input col-sm-12" required value="<?= (isset($_SESSION['postal_code']) ? $_SESSION['postal_code'] : "") ?>">
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-12">
-
-                                    <label for="billState">State </label>
-                                    <input type="text" name="billState" placeholder="State" id="billState" class="inputfield py-2 px-2 Input col-sm-12" required value="<?= (isset($_SESSION['state']) ? $_SESSION['state'] : "") ?>">
-                                </div>
                             </div>
 
                             <div class="col-sm-4 px-4">
@@ -79,14 +74,14 @@
                                     </div>
 
                                     <div class="col-sm-12 mt-2" id="shippingAddressDiv">
-                                        <label for="shippingLine1"> Address </label>
+                                        <label for="shippingLine1"> Address Line 1</label>
                                         <div class="col-sm-12 mb-2 ">
                                             <input type="text" name="shippingLine1" id="shippingLine1" placeholder="Address" class="inputfield py-2  px-2 Input col-sm-12" required>
                                         </div>
                                     </div>
 
                                     <div class="col-sm-12 mb-2 " id="shippingAddressDiv">
-                                        <label for="shippingLine2"> Landmark </label>
+                                        <label for="shippingLine2"> Address Line 2 </label>
                                         <div class="col-sm-12  ">
                                             <input type="text" name="shippingLine2" id="shippingLine2" placeholder="Landmark" class="inputfield py-2  px-2 Input col-sm-12" required>
                                         </div>
@@ -106,12 +101,12 @@
                                         </div>
 
                                     </div>
-                                    <div class="col-sm-12 mb-2">
+                                    <!-- <div class="col-sm-12 mb-2">
 
                                         <label for="shippingState">State </label>
                                         <input type="text" name="shippingState" placeholder="" id="shippingState" class="inputfield py-2 px-2 Input col-sm-12" required>
 
-                                    </div>
+                                    </div> -->
                                     <div class="col-sm-12 ">
                                         <label for="shippingCountry">Country </label>
                                         <input type="text" name="shippingCountry" placeholder="" id="shippingCountry" class="inputfield py-2 px-2 Input col-sm-12" required>

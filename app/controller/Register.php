@@ -6,6 +6,7 @@ class Register extends BaseController
 {
     private $message = "";
     private $userModel;
+
     public function __construct()
     {
         $this->userModel = $this->model('User');

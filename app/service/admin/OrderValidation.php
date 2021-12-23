@@ -1,5 +1,7 @@
 <?php
 
+use SebastianBergmann\Environment\Console;
+
 class OrderValidation implements Email
 {
     private $email;
@@ -49,12 +51,18 @@ class OrderValidation implements Email
     public function validateAddress($address, $key)
     {
 
-        $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . str_replace(" ", "", $address) . '&key=' . $key->apiKey;
+
+        $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($address) . '&key=' . trim($key->apiKey);
+
         $json = @file_get_contents($url);
         $data = json_decode($json);
-
         $status = $data->status;
         if ($status == "OK") {
+            if ($data->results[0]->partial_match == true) {
+                $partialAddress = similar_text($data->results[0]->formatted_address, $address, $perc);
+                return $perc * 25 / 100;
+            }
+
             return 0;
         } else {
             return 25;

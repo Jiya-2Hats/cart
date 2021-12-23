@@ -4,8 +4,6 @@ use Core\BaseModel\BaseModel;
 
 class Google extends BaseModel
 {
-
-
     public function insert($apiKey)
     {
         try {
@@ -17,6 +15,7 @@ class Google extends BaseModel
             echo $e->getMessage();
         }
     }
+
     public function key()
     {
         try {

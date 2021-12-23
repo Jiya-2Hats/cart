@@ -9,9 +9,9 @@ class Admin extends BaseController
     private $googleModel;
     private $status = "";
     private $apiStatus = "";
+
     public function __construct()
     {
-
         $this->fraudMailModel = $this->model("FraudMail");
         $this->googleModel = $this->model("Google");
     }
@@ -93,7 +93,6 @@ class Admin extends BaseController
                 'shipLine1' => $_POST['shippingLine1'],
                 'shipLine2' => $_POST['shippingLine2'],
                 'shipCity' => $_POST['shippingCity'],
-                'shipState' => $_POST['shippingState'],
                 'shipCountry' => $_POST['shippingCountry'],
                 'shipPostalCode' => $_POST['shippingPostalCode'],
             ];
@@ -105,8 +104,8 @@ class Admin extends BaseController
             $this->googleModel = $this->model("Google");
             $key = $this->googleModel->key();
             $this->orderService = $this->service('admin/OrderValidation');
-            $address = $updateOrderData['shipLine1'] . $updateOrderData['shipLine2'] . $updateOrderData['shipCity'] . $updateOrderData['shipState'] . $updateOrderData['shipCountry'] . $updateOrderData['shipPostalCode'];
-            $validateData = ['address' => str_replace(" ", "", $address), 'email' => $updateOrderData['email']];
+            $address = trim($updateOrderData['shipLine1']) . " " . trim($updateOrderData['shipLine2']) . ", " . trim($updateOrderData['shipCity']) . ", " . trim($updateOrderData['shipPostalCode']) . ", " .  trim($updateOrderData['shipCountry']);
+            $validateData = ['address' => $address, 'email' => $updateOrderData['email']];
             $violationList =  $this->orderService->validateEmailAndAddresss($validateData, $fraudMailList, $key);
             $this->orderModel = $this->model('Order');
             $updateStatus = $this->orderModel->updateOrderById($updateOrderData, $violationList);

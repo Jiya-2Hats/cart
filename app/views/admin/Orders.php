@@ -11,9 +11,9 @@
                             <th class="col-sm-2">Name</th>
                             <th class="col-sm-1">Price</th>
                             <th class="col-sm-2">Email</th>
-                            <th class="col-sm-6">Shipping Address</th>
+                            <th class="col-sm-3">Shipping Address</th>
                             <th class="col-sm-1">Status</th>
-                            <th class="col-sm-1">Violation</th>
+                            <th class="col-sm-2">Overall Violation</th>
                         </tr>
                     </thead>
                     <tbody> <?php
@@ -44,7 +44,7 @@
                                                         <span> Email Structure Violation </span>
                                                     </div>
                                                     <div class="row text-center pt-2">
-                                                        <span><?= $orderItem->emailStructureViolation ?>%</span>
+                                                        <span><?= $orderItem->emailStructureViolation * 4 ?>%</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3 px-5 border-grey">
@@ -52,7 +52,7 @@
                                                         <span> Email Domain Violation </span>
                                                     </div>
                                                     <div class="row text-center pt-2">
-                                                        <span><?= $orderItem->emailDomainViolation ?>%</span>
+                                                        <span><?= $orderItem->emailDomainViolation * 4 ?>%</span>
                                                     </div>
                                                 </div>
 
@@ -61,7 +61,7 @@
                                                         <span> Fraud Email Violation </span>
                                                     </div>
                                                     <div class="row text-center pt-2">
-                                                        <span><?= $orderItem->fraudEmailViolation ?>%</span>
+                                                        <span><?= $orderItem->fraudEmailViolation * 4 ?>%</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3 px-5 border-grey">
@@ -69,7 +69,7 @@
                                                         <span> Address Violation </span>
                                                     </div>
                                                     <div class="row text-center pt-2">
-                                                        <span><?= $orderItem->addressViolation ?>%</span>
+                                                        <span><?= $orderItem->addressViolation * 4 ?>%</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -98,14 +98,14 @@
                                         <input type="email" name="email" id="email" class="inputfield py-2 px-2 Input col-sm-12" required>
                                     </div>
                                     <div class="col-sm-12 mt-2" id="shippingAddressDiv">
-                                        <label for="shippingLine1"> Address </label>
+                                        <label for="shippingLine1"> Address Line 1</label>
                                         <div class="col-sm-12 mb-2 ">
                                             <input type="text" name="shippingLine1" id="shippingLine1" placeholder="Address" class="inputfield py-2  px-2 Input col-sm-12" required>
                                         </div>
                                     </div>
 
                                     <div class="col-sm-12 mb-2 " id="shippingAddressDiv">
-                                        <label for="shippingLine2"> Landmark </label>
+                                        <label for="shippingLine2"> Address Line 2 </label>
                                         <div class="col-sm-12  ">
                                             <input type="text" name="shippingLine2" id="shippingLine2" placeholder="Landmark" class="inputfield py-2  px-2 Input col-sm-12" required>
                                         </div>
@@ -125,12 +125,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="col-sm-12 mb-2">
 
-                                        <label for="shippingState">State </label>
-                                        <input type="text" name="shippingState" placeholder="" id="shippingState" class="inputfield py-2 px-2 Input col-sm-12" required>
-
-                                    </div>
                                     <div class="col-sm-12 ">
                                         <label for="shippingCountry">Country </label>
                                         <input type="text" name="shippingCountry" placeholder="" id="shippingCountry" class="inputfield py-2 px-2 Input col-sm-12" required>
